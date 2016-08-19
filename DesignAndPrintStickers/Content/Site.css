@@ -59,10 +59,10 @@
 
 /*#region Footer CSS */
 footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     color: white;
-    left: 35%;
+  
 }
 
     footer a {
