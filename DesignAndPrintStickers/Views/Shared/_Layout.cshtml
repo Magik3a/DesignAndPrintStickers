@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/overhang.min.css" rel="stylesheet" />
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.2/cropper.min.css" rel="stylesheet" />
+ 
+</head>
+<body>
+    <div id="wrapper" data-spy="scroll" data-target="#spy" class="">
+        @Html.Partial("Menus/SideMenu")
+        <!-- Page content -->
+        <div id="page-content-wrapper" class="">
+
+            <div class="content-header">
+                <h1 id="home" class="pull-left">
+                    <a href="#" class="btn btn-menu btn-lg toggle menu-toggle">
+                        <span class="glyphicon glyphicon-align-justify"></span>
+
+                    </a>
+                </h1>
+                <div class="pull-right">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-primary">Share on FB</button>
+                        <button type="button" class="btn btn-danger">Share on G+</button>
+                    </div>
+                </div>
+            </div>
+
+            @RenderBody()
+
+
+            <footer>
+                <hr />
+                <div class="content-wrapper text-center">
+                    <div class="float-left">
+                        <p>
+                            &copy;  www.application-name.com @DateTime.Now.Year- Version @typeof(MvcApplication).Assembly.GetName().Version <br />
+                            Designed by Petya Petkova
+                            <a href="http://www.acceler8design.com" target="_blank" title="www.acceler8design.com">www.acceler8design.com</a>
+                            , Programmed by Svetlin Krastanov -
+                            <a href="http://www.s2kdesign.com" target="_blank" title="www.s2kdesign.com">www.s2kdesign.com</a>
+                        </p>
+
+                    </div>
+                </div>
+            </footer>
+        </div><a href="#" target="_blank" class="">
+
+        </a>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script src="~/Scripts/overhang.min.js"></script>
+    <script src="~/Scripts/DesignAndPrintStickers.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            /*Menu-toggle*/
+            $(".menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("active");
+            });
+        });
+    </script>
+</body>
+</html>

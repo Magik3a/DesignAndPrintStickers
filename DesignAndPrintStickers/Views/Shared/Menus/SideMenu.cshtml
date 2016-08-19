@@ -1,0 +1,72 @@
+﻿<!-- Sidebar -->
+<div id="sidebar-wrapper" class="">
+    <nav id="spy">
+        <ul class="sidebar-nav nav">
+            <li class="sidebar-brand active" style="margin-bottom: 50px">
+                <a href="#home" class="navbar-brand">
+                    <img src="~/Images/Logo.png" class="img-responsive logo img-thumbnail" />
+                </a>
+
+            </li>
+            <p class="follow">
+                Follow this steps
+            </p>
+            <li class="">
+                <a href="#choose-paper" data-scroll="" class="" id="aChoosePaper">
+            
+                        <img src="~/Images/buttonn1.jpg" class="solo"/>
+            
+
+                </a>
+
+            </li>
+            <li class="">
+                <a href="#choose-template" data-scroll="" class="" id="aChooseTemplate">
+                         <img src="~/Images/buttonn2.jpg" class="solo"/>
+                </a>
+
+            </li>
+            <li class="">
+                <a href="#choose-image" data-scroll="" class="" id="aChoosePictures">
+                         <img src="~/Images/buttonn3.jpg" class="solo"/>
+                </a>
+
+            </li>
+            <li class="">
+                <a href="#finishAndPrint" data-scroll="" class="" id="aFinishAndPrint">
+                         <img src="~/Images/buttonn4.jpg" class="solo"/>
+                </a>
+
+            </li>
+        </ul>
+        <ul class="list-group down-menu">
+            <li class="list-group-item">
+                <a href="#" class="btn btn-menu btn-lg toggle menu-toggle">
+                    <span class="glyphicon glyphicon-align-justify col-md-3">
+
+                    </span>
+                    <span class="col-md-9">
+                        Shrink menu
+                    </span>
+                </a>
+            </li>
+            <li class="list-group-item">
+              
+                <button class="btn btn-info btn-lg center-block sharp-corners" data-target="#demoModal" data-toggle="modal" > 
+                    Click to see demo!
+                </button>
+
+            </li>
+            <li class="list-group-item">
+               
+                <button class="btn btn-info btn-lg center-block sharp-corners" data-target="#emailModal" data-toggle="modal">
+                    Send us good news!
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+@Html.Partial("ModalTemplates/DemoModal")
+
+@Html.Partial("ModalTemplates/EmailModal")
