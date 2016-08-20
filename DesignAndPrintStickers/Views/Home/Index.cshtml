@@ -19,7 +19,7 @@
 
 
 <div class="col-md-12 pull-left row-body">
-    <button class="btn btn-info btn-sm col-md-2 text-justify sharp-corners btn-choose-paper">
+    <button data-papersizename="A4" class="btn btn-info btn-sm col-md-2 text-justify sharp-corners btn-choose-paper">
         <span class="pull-left">
             <p class="custom-heading">A4 Standard</p>
         </span>
@@ -32,7 +32,7 @@
         </span>
     </button>
 
-    <button class="btn btn-info btn-sm col-md-2 text-justify sharp-corners  btn-choose-paper">
+    <button  data-papersizename="US Letter"  class="btn btn-info btn-sm col-md-2 text-justify sharp-corners  btn-choose-paper">
         <span class="pull-left">
             <p class="custom-heading">US Letter</p>
         </span>
@@ -64,7 +64,7 @@
 
     @foreach (var template in Model)
     {
-        <div class="col-md-3 template">
+        <div class="col-md-3 template" data-templatename="@template.Name">
 
             <div class="panel panel-primary">
                 <div class="panel-heading">@template.Name  - Boxes in current template - @template.BoxCount </div>
@@ -99,7 +99,7 @@
 <div class="clearfix"></div>
 
 <div class="col-md-12 add-image-row">
-    <button class="btn btn-info btn-lg sharp-corners col-md-3 col-md-offset-1">Open popup for editing</button>
+    <button class="btn btn-info btn-lg sharp-corners col-md-3 col-md-offset-1" id="btnAddImage">Open popup for editing</button>
 </div>
 
 <div class="col-md-12 pull-left row-header">
