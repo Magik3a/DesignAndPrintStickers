@@ -131,6 +131,7 @@ footer {
 }
 
 .active-template .panel {
+    background-color: blue;
     -moz-box-shadow: 0 0 20px blue inset;
     -webkit-box-shadow: 0 0 20px blue inset;
     box-shadow: 0 0 20px blue inset;

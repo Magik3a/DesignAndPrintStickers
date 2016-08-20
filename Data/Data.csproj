@@ -61,6 +61,11 @@
     <Compile Include="EfGenericRepository.cs" />
     <Compile Include="IDbContext.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="Migrations\201608201302527_201608201301380_AutomaticMigration.cs" />
+    <Compile Include="Migrations\201608201302527_201608201301380_AutomaticMigration.Designer.cs">
+      <DependentUpon>201608201302527_201608201301380_AutomaticMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +77,11 @@
       <Project>{573D649F-69C5-401A-BA11-672EC3F097D3}</Project>
       <Name>Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608201302527_201608201301380_AutomaticMigration.resx">
+      <DependentUpon>201608201302527_201608201301380_AutomaticMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

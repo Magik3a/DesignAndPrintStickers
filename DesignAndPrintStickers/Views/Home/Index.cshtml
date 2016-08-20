@@ -67,12 +67,12 @@
              <div class="col-md-3 template">
 
             <div class="panel panel-primary">
-                <div class="panel-heading">Boxes in current template - 10</div>
+                <div class="panel-heading">@template.Name  - Boxes in current template - @template.BoxCount </div>
                 <div class="panel-body">
 
-                    @for (int j = 0; j < 10; j++)
+                    @for (int j = 0; j < template.BoxCount; j++)
                     {
-                        <div class="template-box">
+                        <div class="template-box @template.CssClass">
 
                         </div>
                     }

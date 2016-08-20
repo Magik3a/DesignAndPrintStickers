@@ -21,5 +21,8 @@ namespace Models
         [Column(TypeName = "text")]
         [Required]
         public string Css { get; set; }
+
+        [Required]
+        public int BoxCount { get; set; }
     }
 }
