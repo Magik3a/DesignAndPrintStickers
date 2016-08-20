@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Data;
+using DataServices;
+using Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -9,8 +12,15 @@ using System.Web.Mvc;
 
 namespace DesignAndPrintStickers.Controllers
 {
+
     public class HomeController : Controller
     {
+        private readonly ITemplatesService templatesService;
+        public HomeController(ITemplatesService templatesService)
+        {
+            this.templatesService = templatesService;
+        }
+
         public ActionResult Index()
         {
             List<Template> lstTemplates = new List<Template>();

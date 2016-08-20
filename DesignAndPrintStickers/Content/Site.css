@@ -111,6 +111,13 @@ footer {
     font-weight: 600;
     font-size: 25px;
 }
+.active-paper {
+    -moz-box-shadow: 0 0 25px #060090 inset;
+    -webkit-box-shadow: 0 0 25px #060090 inset;
+    box-shadow: 0 0 25px #060090 inset;
+    border: solid 2px blue;
+}
+
 
 .choose-template-row {
     padding-top: 20px;
@@ -119,14 +126,17 @@ footer {
 .choose-template-row .panel .panel-body {
 
 }
-.template-box{
-    width: 20mm;
-        border: 1px solid #989898;
-    background: white;
-    height: 20mm;
-    margin: 5px;
-    display: inline-block;
+.template .panel{
+    cursor: pointer;
 }
+
+.active-template .panel {
+    -moz-box-shadow: 0 0 20px blue inset;
+    -webkit-box-shadow: 0 0 20px blue inset;
+    box-shadow: 0 0 20px blue inset;
+}
+
+
 .add-image-row{
     padding-top: 20px;
     padding-bottom: 20px;
