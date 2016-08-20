@@ -17,8 +17,8 @@
     overflow: auto;
     padding-left: 250px;
     transition: all 0.4s ease 0s;
-    background-image: url(../Images/backgraound-tile.jpg);
-    background-position: top;
+    background-color:#696969;
+   
     background-attachment: fixed;
 }
 
@@ -88,7 +88,7 @@ footer {
 
 
 .row-header hr {
-    border-top: 4px solid white;
+    border-top: 2px solid white;
 }
 
 .row-header h4 {
@@ -108,7 +108,7 @@ footer {
     }
 
 .row-body button span:not(:nth-child(3)) {
-    font-weight: 900;
+    font-weight: 600;
     font-size: 25px;
 }
 
@@ -121,7 +121,7 @@ footer {
 }
 .template-box{
     width: 20mm;
-        border: 2px solid black;
+        border: 1px solid #989898;
     background: white;
     height: 20mm;
     margin: 5px;
@@ -167,6 +167,7 @@ footer {
 .logo {
     width: 100%;
     padding: 10px;
+    border:none;
 }
 
 .logo-home {
@@ -327,3 +328,20 @@ footer {
 }
 
 /*#endregion Side menu CSS END*/
+
+/*******************************************Petya's UI changes*******************************************/
+
+/*Paper Size Buttons*/
+.custom-heading{
+    font-size:17px;
+   
+}
+
+.custom-size{
+    font-size:14px;
+}
+
+.btn-info{
+    border-radius:5px;
+   
+}
