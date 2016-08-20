@@ -4,11 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using AutoMapper;
+using DataServices;
 
 namespace DesignAndPrintStickers.Models
 {
     public class IndexViewModels : IMapFrom<Template>
     {
+       
         public string Name { get; set; }
         
         public string CssClass { get; set; }
@@ -16,5 +19,6 @@ namespace DesignAndPrintStickers.Models
         public string Css { get; set; }
 
         public int BoxCount { get; set; }
+        
     }
 }

@@ -64,7 +64,7 @@
 
     @foreach (var template in Model)
     {
-             <div class="col-md-3 template">
+        <div class="col-md-3 template">
 
             <div class="panel panel-primary">
                 <div class="panel-heading">@template.Name  - Boxes in current template - @template.BoxCount </div>
@@ -80,9 +80,9 @@
             </div>
         </div>
     }
- 
-   
-    
+
+
+
 </div>
 
 <div class="col-md-12 pull-left row-header">
@@ -139,3 +139,15 @@
 </div>
 
 <div class="clearfix"></div>
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var fourColumnHeight = $(".template-box").width();
+            $(".template-box").height(fourColumnHeight);
+            //ImageCropper.init();
+        });
+    </script>
+}

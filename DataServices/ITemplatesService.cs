@@ -6,5 +6,7 @@ namespace DataServices
     public interface ITemplatesService
     {
         IQueryable<Template> GetTemplates();
+
+        IQueryable<Template> GetTemplateByName(string TemplateName);
     }
 }

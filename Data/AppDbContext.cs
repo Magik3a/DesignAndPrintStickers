@@ -16,6 +16,7 @@ namespace Data
         {
         }
 
+        public virtual IDbSet<PaperSize> PaperSizes { get; set; }
 
         public virtual IDbSet<Template> Templates { get; set; }
 

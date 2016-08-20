@@ -57,7 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPaperSizesService.cs" />
     <Compile Include="ITemplatesService.cs" />
+    <Compile Include="PaperSizesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplatesService.cs" />
   </ItemGroup>

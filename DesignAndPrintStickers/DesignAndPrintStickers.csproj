@@ -203,6 +203,7 @@
     <Compile Include="Infrastructure\Mapping\ICustomMapping.cs" />
     <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddImagesModalPartialViewModel.cs" />
     <Compile Include="Models\IndexViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -353,6 +354,7 @@
     <Content Include="Views\Shared\Menus\SideMenu.cshtml" />
     <Content Include="Views\Shared\ModalTemplates\DemoModal.cshtml" />
     <Content Include="Views\Shared\ModalTemplates\EmailModal.cshtml" />
+    <Content Include="Views\Shared\ModalTemplates\AddImagesModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

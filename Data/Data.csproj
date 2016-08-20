@@ -65,6 +65,10 @@
     <Compile Include="Migrations\201608201302527_201608201301380_AutomaticMigration.Designer.cs">
       <DependentUpon>201608201302527_201608201301380_AutomaticMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608201411080_201608201410507_AutomaticMigration.cs" />
+    <Compile Include="Migrations\201608201411080_201608201410507_AutomaticMigration.Designer.cs">
+      <DependentUpon>201608201411080_201608201410507_AutomaticMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,6 +85,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201608201302527_201608201301380_AutomaticMigration.resx">
       <DependentUpon>201608201302527_201608201301380_AutomaticMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608201411080_201608201410507_AutomaticMigration.resx">
+      <DependentUpon>201608201411080_201608201410507_AutomaticMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

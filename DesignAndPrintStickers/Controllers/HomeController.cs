@@ -18,9 +18,11 @@ namespace DesignAndPrintStickers.Controllers
     public class HomeController : Controller
     {
         private readonly ITemplatesService templatesService;
-        public HomeController(ITemplatesService templatesService)
+        private readonly IPaperSizesService paperSizesService;
+        public HomeController(ITemplatesService templatesService, IPaperSizesService paperSizesService)
         {
             this.templatesService = templatesService;
+            this.paperSizesService = paperSizesService;
         }
 
         public ActionResult Index()
@@ -30,6 +32,23 @@ namespace DesignAndPrintStickers.Controllers
             return View(model);
         }
 
+        public ActionResult GetAddImagesModal(string TemplateName, string PaperSize)
+        {
+            // TODO: Simplify this with ICustomMapping for model 
+
+            var model = new AddImagesModalPartialViewModel();
+
+            var template = templatesService.GetTemplateByName(TemplateName).FirstOrDefault();
+            var paperSize = paperSizesService.GetPaperSizeByName(PaperSize).FirstOrDefault();
+
+            model.PaperSizeName = paperSize.Name;
+            model.PaperSizeHeight = paperSize.Height;
+            model.PaperSizeWith = paperSize.WIdth;
+            model.TemplateClass = template.CssClass;
+            model.BoxesCount = template.BoxCount;
+
+            return PartialView("ModalTemplates/AddImagesModal", model);
+        }
 
         #region Mailing functions
 
@@ -85,19 +104,7 @@ namespace DesignAndPrintStickers.Controllers
 
         #endregion
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
         
     }
 

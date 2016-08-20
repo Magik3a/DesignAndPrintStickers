@@ -18,6 +18,10 @@ namespace DataServices
         }
 
 
+        public IQueryable<Template> GetTemplateByName(string TemplateName)
+        {
+            return db.All().Where(t => t.Name == TemplateName);
+        }
 
         public IQueryable<Template> GetTemplates()
         {
