@@ -1,5 +1,7 @@
-﻿using Data;
+﻿using AutoMapper.QueryableExtensions;
+using Data;
 using DataServices;
+using DesignAndPrintStickers.Models;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -23,16 +25,9 @@ namespace DesignAndPrintStickers.Controllers
 
         public ActionResult Index()
         {
-            List<Template> lstTemplates = new List<Template>();
+            var model = templatesService.GetTemplates().ProjectTo<IndexViewModels>().ToList();
 
-            lstTemplates.Add(new Template
-            {
-                TemplateName = "Square",
-                TemplateClass = "template-square",
-                BoxCount = 12
-            });
-
-            return View();
+            return View(model);
         }
 
 
@@ -103,15 +98,7 @@ namespace DesignAndPrintStickers.Controllers
 
             return View();
         }
-
-        private class Template
-        {
-            public string TemplateName;
-
-            public string TemplateClass;
-
-            public int BoxCount;
-        }
+        
     }
 
 

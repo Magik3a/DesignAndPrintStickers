@@ -1,6 +1,10 @@
-﻿namespace DataServices
+﻿using Models;
+using System.Linq;
+
+namespace DataServices
 {
     public interface ITemplatesService
     {
+        IQueryable<Template> GetTemplates();
     }
 }

@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@model List<DesignAndPrintStickers.Models.IndexViewModels>
+
 
 <div class="col-md-12 pull-left row-header">
     <div class="col-md-2">
@@ -60,11 +62,9 @@
 
 <div class="col-md-12  choose-template-row">
 
-
-
-    @for (int i = 0; i < 4; i++)
+    @foreach (var template in Model)
     {
-        <div class="col-md-3 template">
+             <div class="col-md-3 template">
 
             <div class="panel panel-primary">
                 <div class="panel-heading">Boxes in current template - 10</div>
@@ -80,6 +80,9 @@
             </div>
         </div>
     }
+ 
+   
+    
 </div>
 
 <div class="col-md-12 pull-left row-header">
