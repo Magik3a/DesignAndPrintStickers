@@ -210,6 +210,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-DesignAndPrintStickers-20160819012001.mdf" />
+    <Content Include="App_Data\aspnet-DesignAndPrintStickers-20160819012001_log.ldf">
+      <DependentUpon>aspnet-DesignAndPrintStickers-20160819012001.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -356,9 +360,7 @@
     <Content Include="Views\Shared\ModalTemplates\EmailModal.cshtml" />
     <Content Include="Views\Shared\ModalTemplates\AddImagesModal.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
