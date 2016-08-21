@@ -46,6 +46,7 @@ namespace DesignAndPrintStickers.Controllers
             model.PaperSizeWith = paperSize.WIdth;
             model.TemplateClass = template.CssClass;
             model.BoxesCount = template.BoxCount;
+            model.TemplateName = TemplateName;
 
             return PartialView("ModalTemplates/AddImagesModal", model);
         }

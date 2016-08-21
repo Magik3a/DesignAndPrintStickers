@@ -1,21 +1,20 @@
 ﻿@model DesignAndPrintStickers.Models.AddImagesModalPartialViewModel
 
-<div class="modal fade" id="AddImagesModal" tabindex="-1" role="dialog" aria-labelledby="AddImagesModal-label">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="AddImagesModal-label">@Model.TemplateName - Choosen Paper size: @Model.PaperSizeName</h4>
-            </div>
-            <div class="modal-body" id="AddImageModalBody">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="AddImagesModal-label">@Model.TemplateName - Choosen Paper size: @Model.PaperSizeName</h4>
+</div>
+<div class="modal-body" id="AddImageModalBody" style="width: @String.Format("{0}{1}", Model.PaperSizeWith, "mm"); height: @String.Format("{0}{1}",Model.PaperSizeHeight,"mm")">
+    <div style="width: @String.Format("{0}{1}", 100, "%"); height: @String.Format("{0}{1}",Model.PaperSizeHeight,"mm")">
+        @for (int j = 0; j < Model.BoxesCount; j++)
+        {
+            <div class="template-box @Model.TemplateClass" style="height: 14%">
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
-        </div>
+        }
     </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary">Save</button>
 </div>
