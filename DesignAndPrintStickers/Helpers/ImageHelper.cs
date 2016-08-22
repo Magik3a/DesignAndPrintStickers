@@ -13,7 +13,15 @@
         {
             using (MemoryStream stream = new MemoryStream(content))
             {
-                return CropImage(stream, x, y, width, height);
+                    return CropImage(stream, x, y, width, height);
+            }
+        }
+
+        public static byte[] RoundCornersImage(byte[] content, int cornerRadius)
+        {
+            using (MemoryStream stream = new MemoryStream(content))
+            {
+                return RoundCorners(stream, cornerRadius);
             }
         }
 
@@ -43,6 +51,26 @@
                     }
                 }
             }
+        }
+
+        private static byte[] RoundCorners(Stream content, int cornerRadius)
+        {
+            cornerRadius *= 2;
+            Image image = Image.FromStream(content);
+
+            Bitmap roundedImage = new Bitmap(image.Width, image.Height);
+            GraphicsPath gp = new GraphicsPath();
+            gp.AddArc(0, 0, cornerRadius, cornerRadius, 180, 90);
+            gp.AddArc(0 + roundedImage.Width - cornerRadius, 0, cornerRadius, cornerRadius, 270, 90);
+            gp.AddArc(0 + roundedImage.Width - cornerRadius, 0 + roundedImage.Height - cornerRadius, cornerRadius, cornerRadius, 0, 90);
+            gp.AddArc(0, 0 + roundedImage.Height - cornerRadius, cornerRadius, cornerRadius, 90, 90);
+            using (Graphics g = Graphics.FromImage(roundedImage))
+            {
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.SetClip(gp);
+                g.DrawImage(image, Point.Empty);
+            }
+            return GetBitmapBytes(roundedImage);
         }
 
         public static byte[] GetBitmapBytes(Bitmap source)

@@ -105,8 +105,7 @@ var ajx = {
 
 };
 
-
-$("#download-pdf-button").click(function () {
+function DownloadPdf() {
     var param = {
         html: $("#page-for-printing").html()
     };
@@ -114,17 +113,12 @@ $("#download-pdf-button").click(function () {
     //$.post('/Home/DownloadStickers', { html: $("#page-for-printing").html() } , function (data) {
     //    console.log(data);
     //});
-    var paperSize = "";
-    if ($(".a4size").hasClass('active-paper')) {
-        paperSize = "A4"
-    }
-    if ($(".UsPaper").hasClass('active-paper')) {
-        paperSize = "UsPaper"
-    }
+    var paperSizeName = $(".active-paper").attr("data-papersizename");
+ var templateName = $(".active-template").attr("data-templatename");
     $.ajax({
         cache: false,
         url: '/Home/DownloadStickers',
-        data: JSON.stringify({ html: $("#page-for-printing").html(), pagesize: paperSize }),
+        data: JSON.stringify({ html: $("#page-for-printing").html(), pagesize: paperSizeName, templateName: templateName }),
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
@@ -143,4 +137,4 @@ $("#download-pdf-button").click(function () {
             window.location = '/Home/Download?fileGuid=' + data.fileGuid;
         }
     })
-});
+};

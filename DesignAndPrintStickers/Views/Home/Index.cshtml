@@ -64,7 +64,7 @@
 
     @foreach (var template in Model)
     {
-        <div class="col-md-3 template" data-templatename="@template.Name">
+        <div class="col-md-3 template" data-templatename="@template.Name" data-boxesperrow="@template.BoxesPerRow">
 
             <div class="panel panel-primary">
                 <div class="panel-heading">@template.Name  - Boxes in current template - @template.BoxCount </div>
@@ -143,6 +143,9 @@
                         progress + '%'
                     );
                 },
+                maxFileSize: 5000000, // Maximum File Size in Bytes - 5 MB
+                minFileSize: 100000, // Minimum File Size in Bytes - 100 KB
+                acceptFileTypes: /(zip)|(rar)$/i,  // Allowed File Types
                 dataType: 'json',
                 done: function (e, data) {
                     var imagePath = "../Uploads/" + data.result.filename;
@@ -151,6 +154,7 @@
                     $('#image').show();
                     $('#uploaderForOne').hide();
                     ImageCropper.InitCrop();
+             
                 }
             });
         });
@@ -172,6 +176,7 @@
                     $('#imageForAll').show();
                     $('#uploaderForAll').hide();
                     ImageCropper.InitCropForAll();
+                   
                 }
             });
         });
@@ -180,6 +185,21 @@
 
 
         $(document).ready(function () {
+            $('INPUT[type="file"]').change(function () {
+                var ext = this.value.match(/\.(.+)$/)[1];
+                switch (ext) {
+                    case 'jpg':
+                    case 'jpeg':
+                    case 'png':
+                    case 'gif':
+                        $('#uploadButton').attr('disabled', false);
+                        break;
+                    default:
+                        alert('This is not an allowed file type.');
+                        this.value = '';
+                        return;
+                }
+            });
             $(document).on('hidden.bs.modal', '.modal', function () {
                 $('.modal:visible').length && $(document.body).addClass('modal-open');
             });

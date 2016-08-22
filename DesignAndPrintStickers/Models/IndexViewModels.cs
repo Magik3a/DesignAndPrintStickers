@@ -19,6 +19,7 @@ namespace DesignAndPrintStickers.Models
         public string Css { get; set; }
 
         public int BoxCount { get; set; }
-        
+
+        public int BoxesPerRow { get; set; }
     }
 }

@@ -24,5 +24,11 @@ namespace Models
 
         [Required]
         public int BoxCount { get; set; }
+
+        [Required]
+        public int BoxesPerRow { get; set; }
+
+        [Required]
+        public int BorderRadiusPercent { get; set; }
     }
 }

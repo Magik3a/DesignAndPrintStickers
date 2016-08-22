@@ -10,6 +10,7 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -53,7 +54,7 @@ namespace DesignAndPrintStickers.Controllers
             model.TemplateClass = template.CssClass;
             model.BoxesCount = template.BoxCount;
             model.TemplateName = TemplateName;
-
+            
             return PartialView("ModalTemplates/AddImagesModal", model);
         }
 
@@ -64,7 +65,8 @@ namespace DesignAndPrintStickers.Controllers
      int? cropPointX,
      int? cropPointY,
      int? imageCropWidth,
-     int? imageCropHeight)
+     int? imageCropHeight,
+     string templateName)
         {
             if (string.IsNullOrEmpty(imagePath)
                 || !cropPointX.HasValue
@@ -75,9 +77,15 @@ namespace DesignAndPrintStickers.Controllers
                 return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
             }
 
+            var borderRadius = templatesService.GetTemplateByName(templateName).FirstOrDefault().BorderRadiusPercent;
+
             byte[] imageBytes = System.IO.File.ReadAllBytes(Server.MapPath(imagePath));
             byte[] croppedImage = ImageHelper.CropImage(imageBytes, cropPointX.Value, cropPointY.Value, imageCropWidth.Value, imageCropHeight.Value);
 
+            if (borderRadius > 0)
+            {
+                croppedImage = ImageHelper.RoundCornersImage(croppedImage, borderRadius);
+            }
             string fileName = Path.GetFileName(imagePath);
 
             try
@@ -150,13 +158,14 @@ namespace DesignAndPrintStickers.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult DownloadStickers(string html, string pagesize)
+        public ActionResult DownloadStickers(string html, string pagesize, string templateName)
         {
             if (String.IsNullOrWhiteSpace(pagesize))
                 return Json(false);
             try
             {
-                byte[] bytes = GenerateImagesPDF(html, pagesize);
+                var itemsPerRow = templatesService.GetTemplateByName(templateName).FirstOrDefault().BoxesPerRow;
+                byte[] bytes = GenerateImagesPDF(html, pagesize, itemsPerRow);
 
                 // Generate a new unique identifier against which the file can be stored
                 string handle = Guid.NewGuid().ToString();
@@ -176,6 +185,21 @@ namespace DesignAndPrintStickers.Controllers
             }
         }
 
+        [HttpGet]
+        public virtual ActionResult Download(string fileGuid)
+        {
+            if (Session[fileGuid] != null)
+            {
+                byte[] data = Session[fileGuid] as byte[];
+                return File(data, "application/pdf", DateTime.Now.ToString(CultureInfo.InvariantCulture) + ".pdf");
+            }
+            else
+            {
+                // Problem - Log the error, generate a blank file,
+                //           redirect to another controller action - whatever fits with your application
+                return new EmptyResult();
+            }
+        }
         public byte[] GeneratePDF(string html, string pageSize)
         {
 
@@ -236,7 +260,7 @@ namespace DesignAndPrintStickers.Controllers
             return bytes;
         }
 
-        public byte[] GenerateImagesPDF(string html, string pageSize)
+        public byte[] GenerateImagesPDF(string html, string pageSize, int itemsPerRow)
         {
 
 
@@ -249,7 +273,7 @@ namespace DesignAndPrintStickers.Controllers
             if (pageSize == "A4")
                 doc = new Document(PageSize.A4);
             else
-                doc = new Document(PageSize.LETTER );
+                doc = new Document(PageSize.LETTER);
             var writer = PdfWriter.GetInstance(doc, ms);
             doc.Open();
             doc.NewPage();
@@ -260,26 +284,38 @@ namespace DesignAndPrintStickers.Controllers
             };
             hDocument.LoadHtml(html);
             List<string> xpaths = new List<string>();
-            int itemsPerRow = 4;
             int counter = 0;
+
+            var pdfTable = new PdfPTable(itemsPerRow);
+
             foreach (HtmlNode node in hDocument.DocumentNode.SelectNodes("//img"))
             {
                 counter++;
                 var src = node.Attributes["src"].Value.Split('?')[0];
                 src = Server.MapPath(src);
                 Image jpg = Image.GetInstance(src);
-                jpg.Alignment = Image.TEXTWRAP | Image.ALIGN_LEFT ;
-        
-                jpg.ScaleToFit(140f, 70f);
+
+                if (itemsPerRow == 2)
+                    jpg.ScaleAbsolute(350 / itemsPerRow, 70f);
+                else if (itemsPerRow == 4)
+                    jpg.ScaleAbsolute(350 / itemsPerRow, 115f);
+
                 jpg.Border = 5;
                 jpg.BorderColor = BaseColor.BLACK;
-              
-                doc.Add(jpg);
+                var cell = new PdfPCell();
+                cell.Padding = 10f;
+                cell.AddElement(jpg);
+                pdfTable.AddCell(new PdfPCell(cell));
+
+                // doc.Add(jpg);
                 if (counter == itemsPerRow || (counter > itemsPerRow && counter % itemsPerRow == 0))
                 {
-                    doc.Add(new Paragraph("\n\n\n\n\n\n\n\n\n\n"));
+
+
                 }
+
             }
+            doc.Add(pdfTable);
             foreach (string xpath in xpaths)
             {
                 hDocument.DocumentNode.SelectSingleNode(xpath).Remove();

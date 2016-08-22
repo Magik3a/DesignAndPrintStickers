@@ -24,11 +24,11 @@
     InitCrop: function () {
         //initialize the cropper method
         $('#image').cropper({
-            aspectRatio: 16 / 9,
+            aspectRatio: ($(".active-template").attr("data-boxesperrow") == "4")?1:18/9,
             dragMode: 'move', //enabling dragging of image
             center: true,
             autoCrop: true, //use this to just zoom and pan image around
-            autoCropArea: 1, //the size of the crop box
+            autoCropArea: 0.8, //the size of the crop box
             zoomable: true,
             zoomOnWheel: true,
             crop: function (e) {
@@ -42,11 +42,11 @@
     InitCropForAll: function () {
         //initialize the cropper method
         $('#imageForAll').cropper({
-            aspectRatio: 16 / 9,
+            aspectRatio: ($(".active-template").attr("data-boxesperrow") == "4")?1:18/9,
             dragMode: 'move', //enabling dragging of image
             center: true,
             autoCrop: true, //use this to just zoom and pan image around
-            autoCropArea: 1, //the size of the crop box
+            autoCropArea: 0.8, //the size of the crop box
             zoomable: true,
             zoomOnWheel: true,
             crop: function (e) {
@@ -69,7 +69,8 @@
             cropPointX: ImageCropper.config.cropX,
             cropPointY: ImageCropper.config.cropY,
             imageCropWidth: ImageCropper.config.cropWidth,
-            imageCropHeight: ImageCropper.config.cropHeight
+            imageCropHeight: ImageCropper.config.cropHeight,
+            templateName: $(".active-template").attr("data-templatename")
         };
         ajx.invoke('/Home/CropImage', JSON.stringify(param), function (data) {
             //can refresh the image path in the original location
@@ -99,7 +100,8 @@
             cropPointX: ImageCropper.config.cropX,
             cropPointY: ImageCropper.config.cropY,
             imageCropWidth: ImageCropper.config.cropWidth,
-            imageCropHeight: ImageCropper.config.cropHeight
+            imageCropHeight: ImageCropper.config.cropHeight,
+            templateName: $(".active-template").attr("data-templatename")
         };
 
 
