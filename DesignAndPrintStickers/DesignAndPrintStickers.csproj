@@ -325,6 +325,7 @@
     <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-video.js" />
     <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload.js" />
     <Content Include="Scripts\jQuery.FileUpload\jquery.iframe-transport.js" />
+    <Content Include="Scripts\jquery.printelement.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />

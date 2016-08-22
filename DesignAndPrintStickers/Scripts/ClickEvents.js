@@ -69,6 +69,18 @@ function AddImageToPlaceHolder(elem) {
     //$(".active-box .panel-body").html("<a href='#' class='btn btn-default btn-add-image'>Add image to this place </a> ")
 };
 
+
+function PrintInBrowser(elem) {
+    $('.btn-add-image').hide();
+    $(".template-box").removeClass("active-box");
+    $("#page-for-printing").printElement({
+        printMode: 'popup',
+        importStyle: false,
+        printContainer: false,
+        debug: true
+    });
+};
+
 var ajx = {
     config: {
         url: ''
