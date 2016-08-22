@@ -9,8 +9,8 @@
     <div style="width: @String.Format("{0}{1}", 100, "%"); height: @String.Format("{0}{1}",Model.PaperSizeHeight,"mm")">
         @for (int j = 0; j < Model.BoxesCount; j++)
         {
-            <div class="template-box @Model.TemplateClass" style="height: 15%">
-
+            <div class="template-box @Model.TemplateClass" style="height: 15%"  onmousedown="AddImageToPlaceHolder(this)">
+                <a href='#' class='btn btn-success btn-add-image' style="display: none;" data-toggle="modal" data-target=".add-picture-modal">Add image </a>
             </div>
         }
     </div>

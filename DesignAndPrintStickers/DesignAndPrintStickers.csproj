@@ -338,6 +338,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Uploads\2016-08-22-09-01-28-856.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -378,9 +379,7 @@
     <Content Include="Views\Shared\ModalTemplates\AddImagesModal.cshtml" />
     <Content Include="Views\Shared\ModalTemplates\UploadAndCropImageForOneBox.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Uploads\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

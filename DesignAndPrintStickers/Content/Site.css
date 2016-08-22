@@ -23,7 +23,17 @@
 }
 
 .template-box{
+    cursor: pointer;
     overflow: hidden;
+    position: relative;
+}
+.active-box{
+    box-shadow: 0 0 5px blue;
+}
+.btn-add-image{
+    position: absolute;
+    top: 35%;
+    left: 25%;
 }
 @media only screen and (max-width : 1324px) {
     #page-content-wrapper {
