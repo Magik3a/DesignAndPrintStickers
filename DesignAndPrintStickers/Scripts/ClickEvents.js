@@ -138,3 +138,56 @@ function DownloadPdf() {
         }
     })
 };
+
+
+
+function SendViaEmail(elem) {
+    $(elem).attr("id", "send-message");
+    $(elem).removeClass("btn-danger");
+    $(elem).addClass("btn-warning");
+    $("#email-user-pdf").show(500);
+
+    $(elem).attr("onclick", "SendMessageWithAtachment(this)");
+    $(elem).html("Press again to sent!")
+};
+
+ function SendMessageWithAtachment(elem) {
+    if (!ValidateUserEmail($('#input-user-email-pdf').val())) {
+        return;
+    }
+    $(elem).removeClass("btn-warning");
+    $(elem).addClass("btn-success btn-lg");
+    $("#email-user-pdf").hide(500);
+    console.log("161 line in clickevent < put some ajax here");
+
+    $(elem).html("Message is sent successfully! <br /> Click to send another.")
+    $(elem).attr("id", "send-pdf-button");
+    $(elem).attr("onclick", "SendAnotherMessageWIthAtachment(this)");
+    //   $(this).unbind("click").click();
+};
+
+ function ValidateUserEmail(email) {
+     var testEmail = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+     if (!testEmail.test(email)) {
+         $("body").overhang({
+             type: "warn",
+             message: "This email is not appropriate, can you check what is going on!",
+             duration: 2,
+             upper: true
+         });
+         return false;
+     }
+     return true;
+ };
+
+
+function SendAnotherMessageWIthAtachment(elem) {
+    $(elem).attr("id", "send-message");
+    $(elem).removeClass("btn-danger");
+    $(elem).addClass("btn-warning");
+    $("#email-user-pdf").show(500);
+
+    
+    $(elem).attr("onclick", "SendMessageWithAtachment(this)");
+    $(elem).html("<span class='glyphicon glyphicon-envelope'></span> Press again to sent!")
+};

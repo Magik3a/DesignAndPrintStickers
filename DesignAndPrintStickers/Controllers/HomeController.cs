@@ -299,11 +299,8 @@ namespace DesignAndPrintStickers.Controllers
                     jpg.ScaleAbsolute(350 / itemsPerRow, 70f);
                 else if (itemsPerRow == 4)
                     jpg.ScaleAbsolute(350 / itemsPerRow, 115f);
-
-                jpg.Border = 5;
-                jpg.BorderColor = BaseColor.BLACK;
+                
                 var cell = new PdfPCell();
-                cell.Padding = 10f;
                 cell.AddElement(jpg);
                 pdfTable.AddCell(new PdfPCell(cell));
 
