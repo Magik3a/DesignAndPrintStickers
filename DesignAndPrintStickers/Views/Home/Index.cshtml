@@ -128,8 +128,8 @@
 @Html.Partial("ModalTemplates/UploadAndCropImageForOneBox")
 
 @section Scripts{
-<script src="~/Scripts/jquery.printelement.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.2/cropper.min.js"></script>
+    <script src="~/Scripts/jquery.printelement.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.2/cropper.min.js"></script>
     <script>
         $(function () {
             $('#fileuploadForAll').fileupload({
@@ -243,6 +243,8 @@
                     $('#uploaderForAll').show();
                     $('#image').attr("src", "");
                     $('#image').hide();
+
+
                     $('.add-picture-modal').modal('hide');
                 });
             },
@@ -286,10 +288,13 @@
         };
 
         $(document).ready(function () {
-
+          $(document).on('hidden.bs.modal', '.modal', function () {
+    $('.modal:visible').length && $(document.body).addClass('modal-open');
+});
             var fourColumnHeight = $(".template-box").width();
             $(".template-box").height(fourColumnHeight);
             ImageCropper.init();
         });
+
     </script>
 }
