@@ -200,6 +200,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Infrastructure\Mapping\ICustomMapping.cs" />
     <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -355,8 +357,11 @@
     <Content Include="Views\Shared\ModalTemplates\DemoModal.cshtml" />
     <Content Include="Views\Shared\ModalTemplates\EmailModal.cshtml" />
     <Content Include="Views\Shared\ModalTemplates\AddImagesModal.cshtml" />
+    <Content Include="Views\Shared\ModalTemplates\UploadAndCropImageForOneBox.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Uploads\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
