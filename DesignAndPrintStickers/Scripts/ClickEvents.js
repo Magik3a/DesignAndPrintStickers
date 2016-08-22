@@ -104,3 +104,43 @@ var ajx = {
     }
 
 };
+
+
+$("#download-pdf-button").click(function () {
+    var param = {
+        html: $("#page-for-printing").html()
+    };
+
+    //$.post('/Home/DownloadStickers', { html: $("#page-for-printing").html() } , function (data) {
+    //    console.log(data);
+    //});
+    var paperSize = "";
+    if ($(".a4size").hasClass('active-paper')) {
+        paperSize = "A4"
+    }
+    if ($(".UsPaper").hasClass('active-paper')) {
+        paperSize = "UsPaper"
+    }
+    $.ajax({
+        cache: false,
+        url: '/Home/DownloadStickers',
+        data: JSON.stringify({ html: $("#page-for-printing").html(), pagesize: paperSize }),
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            if (!data) {
+                $("#wrapper").overhang({
+                    type: "error",
+                    message: "Whoops! You think you can skip steps, but actually you can't!",
+                    duration: 2,
+                    upper: true,
+                });
+                return;
+            }
+            console.log(data.fileGuid);
+            window.location = '/Home/Download?fileGuid=' + data.fileGuid;
+        }
+    })
+});

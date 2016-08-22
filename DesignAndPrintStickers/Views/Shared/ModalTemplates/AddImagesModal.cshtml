@@ -5,11 +5,11 @@
     <h4 class="modal-title" id="AddImagesModal-label">@Model.TemplateName - Choosen Paper size: @Model.PaperSizeName</h4>
 </div>
 <div class="modal-body" id="AddImageModalBody" style="width: 100%" >
-    <button class="btn btn-info btn-lg"  data-toggle="modal" data-target=".add-picture-modal">Add image to all boxes</button>
-    <div id="page-for-printing" style="width: @String.Format("{0}{1}", 100, "%"); height: @String.Format("{0}{1}",Model.PaperSizeHeight,"mm")">
+    <button class="btn btn-info btn-lg"  data-toggle="modal" data-target=".add-picture-modal-toall">Add image to all boxes</button>
+    <div id="page-for-printing" style="width: @String.Format("{0}{1}", Model.PaperSizeWith,"mm"); height: @String.Format("{0}{1}",Model.PaperSizeHeight,"mm")">
         @for (int j = 0; j < Model.BoxesCount; j++)
         {
-            <div class="template-box @Model.TemplateClass" style="height: 15%"  onmousedown="AddImageToPlaceHolder(this)">
+            <div class="template-box @Model.TemplateClass" style="height: 42mm"  onmousedown="AddImageToPlaceHolder(this)">
                 <a href='#' class='btn btn-success btn-add-image' style="display: none;" data-toggle="modal" data-target=".add-picture-modal">Add image </a>
             </div>
         }
@@ -36,7 +36,7 @@
             </button>
         </div>
     <div class="col-md-3">
-        <button class="btn btn-info btn-lg sharp-corners" data-dismiss="modal">
+        <button id="download-pdf-button" class="btn btn-info btn-lg sharp-corners" data-dismiss="modal">
            Close
         </button>
     </div>

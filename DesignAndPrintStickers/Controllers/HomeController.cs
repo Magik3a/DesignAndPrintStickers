@@ -3,6 +3,9 @@ using Data;
 using DataServices;
 using DesignAndPrintStickers.Helpers;
 using DesignAndPrintStickers.Models;
+using HtmlAgilityPack;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -145,7 +148,160 @@ namespace DesignAndPrintStickers.Controllers
         #endregion
 
 
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult DownloadStickers(string html, string pagesize)
+        {
+            if (String.IsNullOrWhiteSpace(pagesize))
+                return Json(false);
+            try
+            {
+                byte[] bytes = GenerateImagesPDF(html, pagesize);
+
+                // Generate a new unique identifier against which the file can be stored
+                string handle = Guid.NewGuid().ToString();
+                Session[handle] = bytes.ToArray();
+
+                //return File(bytes, "application/pdf", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+
+                // Note we are returning a filename as well as the handle
+                return new JsonResult()
+                {
+                    Data = new { fileGuid = handle }
+                };
+            }
+            catch (Exception ex)
+            {
+                return Json(false);
+            }
+        }
+
+        public byte[] GeneratePDF(string html, string pageSize)
+        {
+
+
+
+            #region Generate PDF
+            Byte[] bytes;
+            var ms = new MemoryStream();
+            //Create an iTextSharp Document wich is an abstraction of a PDF but **NOT** a PDF
+            var doc = new Document();
+            if (pageSize == "A4")
+                doc = new Document(PageSize.A4);
+            else
+                doc = new Document(PageSize.LETTER);
+            var writer = PdfWriter.GetInstance(doc, ms);
+            doc.Open();
+            doc.NewPage();
+            var hDocument = new HtmlDocument()
+            {
+                OptionWriteEmptyNodes = true,
+                OptionAutoCloseOnEnd = true
+            };
+            hDocument.LoadHtml(html);
+            List<string> xpaths = new List<string>();
+            foreach (HtmlNode node in hDocument.DocumentNode.DescendantNodes())
+            {
+                if (node.Name.ToLower() == "img")
+                {
+                    var src = node.Attributes["src"].Value.Split('?')[0];
+                    src = Server.MapPath(src);
+                    node.SetAttributeValue("src", src);
+                    node.SetAttributeValue("style", "display: inline; float: left;");
+                }
+                else if (node.Name.ToLower() == "a")
+                {
+                    xpaths.Add(node.XPath);
+                }
+            }
+            foreach (string xpath in xpaths)
+            {
+                hDocument.DocumentNode.SelectSingleNode(xpath).Remove();
+            }
+
+            var closedTags = hDocument.DocumentNode.WriteTo();
+            var example_html = closedTags;
+            var example_css = System.IO.File.ReadAllText(Server.MapPath("~/Content/Site.css"));
+            example_css += System.IO.File.ReadAllText(Server.MapPath("~/Content/Templates.min.css"));
+            var msCss = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(example_css));
+            var msHtml = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(example_html));
+            iTextSharp.tool.xml.XMLWorkerHelper.GetInstance().ParseXHtml(writer, doc, msHtml, msCss, Encoding.UTF8);
+            doc.Close();
+            bytes = ms.ToArray();
+
+            //  var testFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "test.pdf");
+            //  System.IO.File.WriteAllBytes(testFile, bytes);
+            #endregion
+
+            return bytes;
+        }
+
+        public byte[] GenerateImagesPDF(string html, string pageSize)
+        {
+
+
+
+            #region Generate PDF
+            Byte[] bytes;
+            var ms = new MemoryStream();
+            //Create an iTextSharp Document wich is an abstraction of a PDF but **NOT** a PDF
+            var doc = new Document();
+            if (pageSize == "A4")
+                doc = new Document(PageSize.A4);
+            else
+                doc = new Document(PageSize.LETTER );
+            var writer = PdfWriter.GetInstance(doc, ms);
+            doc.Open();
+            doc.NewPage();
+            var hDocument = new HtmlDocument()
+            {
+                OptionWriteEmptyNodes = true,
+                OptionAutoCloseOnEnd = true
+            };
+            hDocument.LoadHtml(html);
+            List<string> xpaths = new List<string>();
+            int itemsPerRow = 4;
+            int counter = 0;
+            foreach (HtmlNode node in hDocument.DocumentNode.SelectNodes("//img"))
+            {
+                counter++;
+                var src = node.Attributes["src"].Value.Split('?')[0];
+                src = Server.MapPath(src);
+                Image jpg = Image.GetInstance(src);
+                jpg.Alignment = Image.TEXTWRAP | Image.ALIGN_LEFT ;
         
+                jpg.ScaleToFit(140f, 70f);
+                jpg.Border = 5;
+                jpg.BorderColor = BaseColor.BLACK;
+              
+                doc.Add(jpg);
+                if (counter == itemsPerRow || (counter > itemsPerRow && counter % itemsPerRow == 0))
+                {
+                    doc.Add(new Paragraph("\n\n\n\n\n\n\n\n\n\n"));
+                }
+            }
+            foreach (string xpath in xpaths)
+            {
+                hDocument.DocumentNode.SelectSingleNode(xpath).Remove();
+            }
+
+            var closedTags = hDocument.DocumentNode.WriteTo();
+            var example_html = "";
+            var example_css = System.IO.File.ReadAllText(Server.MapPath("~/Content/Site.css"));
+            example_css += System.IO.File.ReadAllText(Server.MapPath("~/Content/Templates.min.css"));
+            var msCss = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(example_css));
+            var msHtml = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(example_html));
+            iTextSharp.tool.xml.XMLWorkerHelper.GetInstance().ParseXHtml(writer, doc, msHtml, msCss, Encoding.UTF8);
+
+            doc.Close();
+            bytes = ms.ToArray();
+
+            //  var testFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "test.pdf");
+            //  System.IO.File.WriteAllBytes(testFile, bytes);
+            #endregion
+
+            return bytes;
+        }
     }
 
 
