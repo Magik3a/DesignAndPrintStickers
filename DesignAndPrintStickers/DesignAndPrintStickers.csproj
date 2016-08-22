@@ -197,6 +197,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,6 +217,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-noscript.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload.css" />
+    <Content Include="Content\jQuery.FileUpload\img\loading.gif" />
+    <Content Include="Content\jQuery.FileUpload\img\progressbar.gif" />
     <Content Include="Content\overhang.min.css" />
     <Content Include="Content\Templates.css">
       <DependentUpon>Templates.less</DependentUpon>
@@ -306,6 +313,18 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.0.js" />
     <Content Include="Scripts\jquery-ui-1.12.0.min.js" />
+    <Content Include="Scripts\jQuery.FileUpload\cors\jquery.postmessage-transport.js" />
+    <Content Include="Scripts\jQuery.FileUpload\cors\jquery.xdr-transport.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-angular.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-audio.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-image.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-jquery-ui.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-process.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-ui.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-validate.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-video.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.iframe-transport.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />

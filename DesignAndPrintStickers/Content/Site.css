@@ -22,6 +22,9 @@
     background-attachment: fixed;
 }
 
+.template-box{
+    overflow: hidden;
+}
 @media only screen and (max-width : 1324px) {
     #page-content-wrapper {
         width: 900px;

@@ -4,8 +4,8 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title" id="AddImagesModal-label">@Model.TemplateName - Choosen Paper size: @Model.PaperSizeName</h4>
 </div>
-<div class="modal-body" id="AddImageModalBody" style="width: 100%">
-    <button class="btn btn-info btn-lg">Add image to all boxes</button>
+<div class="modal-body" id="AddImageModalBody" style="width: 100%" >
+    <button class="btn btn-info btn-lg"  data-toggle="modal" data-target=".add-picture-modal">Add image to all boxes</button>
     <div style="width: @String.Format("{0}{1}", 100, "%"); height: @String.Format("{0}{1}",Model.PaperSizeHeight,"mm")">
         @for (int j = 0; j < Model.BoxesCount; j++)
         {

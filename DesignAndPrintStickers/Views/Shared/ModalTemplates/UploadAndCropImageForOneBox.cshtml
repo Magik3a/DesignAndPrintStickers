@@ -1,4 +1,9 @@
-﻿<div class="modal fade add-picture-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+﻿<style>.bar {
+    height: 18px;
+    background: green;
+}</style>
+
+<div class="modal fade add-picture-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document" style="background-color: white">
 
         <div class="modal-header">
@@ -14,15 +19,22 @@
 
 
                 @*@(Html.Kendo().Upload()
-                    .Name("files").Multiple(false).HtmlAttributes(new { accept = "image/*" })
-                    .Async(a => a
-                        .Save("Save", "Upload")
-                        .Remove("Remove", "Upload")
-                        .AutoUpload(true)
-                    ).Events(events => events
-                    .Success("onSuccess"))
-                )*@
+                        .Name("files").Multiple(false).HtmlAttributes(new { accept = "image/*" })
+                        .Async(a => a
+                            .Save("Save", "Upload")
+                            .Remove("Remove", "Upload")
+                            .AutoUpload(true)
+                        ).Events(events => events
+                        .Success("onSuccess"))
+                    )*@
 
+                <div class="form-group col-md-5" id="uploaderForAll">
+                    <input class="form-control" id="fileuploadForAll" type="file" name="files" data-url="Upload/Save" />
+
+                    <div id="progress">
+                        <div class="bar" style="width: 0%;"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
