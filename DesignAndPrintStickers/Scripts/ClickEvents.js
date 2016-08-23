@@ -42,7 +42,7 @@ $("#btnAddImage").click(function () {
         $("#AddImagesModal .modal-content").html("");
 
         $("#AddImagesModal .modal-content").append(data);
-          $("#AddImagesModal").modal("show");
+        $("#AddImagesModal").modal("show");
     });
 
 });
@@ -75,9 +75,8 @@ function PrintInBrowser(elem) {
     $(".template-box").removeClass("active-box");
     $("#page-for-printing").printElement({
         printMode: 'popup',
-        importStyle: false,
-        printContainer: false,
-        debug: true
+        importStyle: true,
+        printContainer: false
     });
 };
 
@@ -114,7 +113,7 @@ function DownloadPdf() {
     //    console.log(data);
     //});
     var paperSizeName = $(".active-paper").attr("data-papersizename");
- var templateName = $(".active-template").attr("data-templatename");
+    var templateName = $(".active-template").attr("data-templatename");
     $.ajax({
         cache: false,
         url: '/Home/DownloadStickers',
@@ -127,7 +126,7 @@ function DownloadPdf() {
             if (!data) {
                 $("#wrapper").overhang({
                     type: "error",
-                    message: "Whoops! You think you can skip steps, but actually you can't!",
+                    message: "Whoops! You probably miss to add some images!",
                     duration: 2,
                     upper: true,
                 });
@@ -151,7 +150,7 @@ function SendViaEmail(elem) {
     $(elem).html("Press again to sent!")
 };
 
- function SendMessageWithAtachment(elem) {
+function SendMessageWithAtachment(elem) {
     if (!ValidateUserEmail($('#input-user-email-pdf').val())) {
         return;
     }
@@ -164,21 +163,53 @@ function SendViaEmail(elem) {
     $(elem).attr("id", "send-pdf-button");
     $(elem).attr("onclick", "SendAnotherMessageWIthAtachment(this)");
     //   $(this).unbind("click").click();
+
+        var paperSizeName = $(".active-paper").attr("data-papersizename");
+    var templateName = $(".active-template").attr("data-templatename");
+    $.ajax({
+        cache: false,
+        url: '/Home/SendToEmailWithAtachmnent',
+        data: JSON.stringify({ html: $("#page-for-printing").html(), pagesize: paperSizeName, templateName: templateName, reciever: $("#input-user-email-pdf").val() }),
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            if (!data) {
+                $("#wrapper").overhang({
+                    type: "error",
+                    message: "Whoops! You probably miss to add some images!",
+                    duration: 2,
+                    upper: true,
+                });
+                return;
+            }
+            else {
+                $("#wrapper").overhang({
+                    type: "success",
+                    message: "Woohoo! Message is sent successfully!",
+                    duration: 2,
+                    upper: true,
+                });
+                return;
+            }
+        }
+    });
 };
 
- function ValidateUserEmail(email) {
-     var testEmail = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-     if (!testEmail.test(email)) {
-         $("body").overhang({
-             type: "warn",
-             message: "This email is not appropriate, can you check what is going on!",
-             duration: 2,
-             upper: true
-         });
-         return false;
-     }
-     return true;
- };
+function ValidateUserEmail(email) {
+    var testEmail = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (!testEmail.test(email)) {
+        $("body").overhang({
+            type: "warn",
+            message: "This email is not appropriate, can you check what is going on!",
+            duration: 2,
+            upper: true
+        });
+        return false;
+    }
+    return true;
+};
 
 
 function SendAnotherMessageWIthAtachment(elem) {
@@ -187,7 +218,7 @@ function SendAnotherMessageWIthAtachment(elem) {
     $(elem).addClass("btn-warning");
     $("#email-user-pdf").show(500);
 
-    
+
     $(elem).attr("onclick", "SendMessageWithAtachment(this)");
     $(elem).html("Press again to sent!")
 };

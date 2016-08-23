@@ -155,6 +155,27 @@ namespace DesignAndPrintStickers.Controllers
 
         }
 
+        public static Boolean SendEmail(string reciever, string subject, string body, byte[] FileByte, string NameAtachemnt)
+        {
+            try
+            {
+                SmtpClient SmtpServer = new SmtpClient();
+                MailMessage mail = new MailMessage();
+                mail.To.Add(reciever);
+                mail.Subject = subject;
+                mail.Body = body;
+                Attachment file = new Attachment(new MemoryStream(FileByte), NameAtachemnt);
+                mail.Attachments.Add(file);
+                mail.IsBodyHtml = true;
+                SmtpServer.Send(mail);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
         #endregion
 
 
@@ -166,8 +187,14 @@ namespace DesignAndPrintStickers.Controllers
                 return Json(false);
             try
             {
-                var itemsPerRow = templatesService.GetTemplateByName(templateName).FirstOrDefault().BoxesPerRow;
-                byte[] bytes = GenerateImagesPDF(html, pagesize, itemsPerRow);
+                var template = templatesService.GetTemplateByName(templateName).FirstOrDefault();
+                byte[] bytes = GenerateImagesPDF(
+                    html, 
+                    pagesize, 
+                    template.BoxesPerRow, 
+                    float.Parse(template.MarginTop), 
+                    float.Parse(template.MarginBottom),
+                    float.Parse(template.MarginLeft), float.Parse(template.MarginRIght));
 
                 // Generate a new unique identifier against which the file can be stored
                 string handle = Guid.NewGuid().ToString();
@@ -202,6 +229,36 @@ namespace DesignAndPrintStickers.Controllers
                 return new EmptyResult();
             }
         }
+
+
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult SendToEmailWithAtachmnent(string html, string pagesize, string templateName, string reciever)
+        {
+            if (String.IsNullOrWhiteSpace(pagesize))
+                return Json(false);
+            
+            try
+            {
+                var template = templatesService.GetTemplateByName(templateName).FirstOrDefault();
+                byte[] bytes = GenerateImagesPDF(
+                    html,
+                    pagesize,
+                    template.BoxesPerRow,
+                    float.Parse(template.MarginTop),
+                    float.Parse(template.MarginBottom),
+                    float.Parse(template.MarginLeft), float.Parse(template.MarginRIght));
+                SendEmail(reciever, "New email with stickers", "Here should be logo", bytes, DateTime.Now.ToString(CultureInfo.InvariantCulture) + ".pdf");
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                return Json(false);
+            }
+        }
+
+
         public byte[] GeneratePDF(string html, string pageSize)
         {
 
@@ -262,7 +319,7 @@ namespace DesignAndPrintStickers.Controllers
             return bytes;
         }
 
-        public byte[] GenerateImagesPDF(string html, string pageSize, int itemsPerRow)
+        public byte[] GenerateImagesPDF(string html, string pageSize, int itemsPerRow, float MarginTop, float MarginBottom, float MarginLeft, float MarginRight)
         {
 
 
@@ -273,9 +330,9 @@ namespace DesignAndPrintStickers.Controllers
             //Create an iTextSharp Document wich is an abstraction of a PDF but **NOT** a PDF
             var doc = new Document();
             if (pageSize == "A4")
-                doc = new Document(PageSize.A4);
+                doc = new Document(PageSize.A4, MarginLeft * 2.8f, MarginRight * 2.8f -28, MarginTop * 2.8f, MarginBottom * 2.8f);
             else
-                doc = new Document(PageSize.LETTER);
+                doc = new Document(PageSize.LETTER, MarginLeft * 2.8f, MarginRight * 2.8f -28, MarginTop * 2.8f, MarginBottom * 2.8f);
             var writer = PdfWriter.GetInstance(doc, ms);
             doc.Open();
             doc.NewPage();
@@ -288,8 +345,7 @@ namespace DesignAndPrintStickers.Controllers
             int counter = 0;
 
             var pdfTable = new PdfPTable(itemsPerRow);
-            pdfTable.WidthPercentage = 93;
-            
+            pdfTable.WidthPercentage = 100;
             foreach (HtmlNode node in hDocument.DocumentNode.SelectNodes("//img"))
             {
                 counter++;
@@ -304,7 +360,10 @@ namespace DesignAndPrintStickers.Controllers
                
                 var cell = new PdfPCell();
                 cell.Border = 0;
-                cell.Padding = 28;
+                // cell.Padding = 28;
+                cell.PaddingRight = 28;
+                
+                cell.PaddingBottom = 28;
                 cell.AddElement(jpg);
                 pdfTable.AddCell(new PdfPCell(cell));
 

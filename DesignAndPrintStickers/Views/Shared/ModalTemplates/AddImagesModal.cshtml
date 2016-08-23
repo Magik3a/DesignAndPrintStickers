@@ -7,12 +7,14 @@
 <div class="modal-body" id="AddImageModalBody" style="width: 100%">
     <button class="btn btn-info btn-lg" data-toggle="modal" data-target=".add-picture-modal-toall">Add image to all boxes</button>
     <div id="page-for-printing" style="width: @String.Format("{0}{1}", Model.PaperSizeWith,"mm"); height: @String.Format("{0}{1}",Model.PaperSizeHeight,"mm")">
-        @for (int j = 0; j < Model.BoxesCount; j++)
-        {
-            <div class="template-box @Model.TemplateClass" style="height: @String.Format("{0}{1}", Model.BoxHeight, "mm"); width: @String.Format("{0}{1}", Model.BoxWidth, "mm");  border-radius: @Model.BorderRadiusPercent%;" onmousedown="AddImageToPlaceHolder(this)">
-                <a href='#' class='btn btn-success btn-add-image' style="display: none;" data-toggle="modal" data-target=".add-picture-modal">Add image </a>
-            </div>
-        }
+    
+            @for (int j = 0; j < Model.BoxesCount; j++)
+            {
+                <div class="template-box @Model.TemplateClass" style="height: @String.Format("{0}{1}", Model.BoxHeight, "mm"); width: @String.Format("{0}{1}", Model.BoxWidth, "mm");  border-radius: @Model.BorderRadiusPercent%;" onmousedown="AddImageToPlaceHolder(this)">
+                    <a href='#' class='btn btn-success btn-add-image' style="display: none;" data-toggle="modal" data-target=".add-picture-modal">Add image </a>
+                </div>
+            }
+     
     </div>
 
 
@@ -20,11 +22,11 @@
 <div class="modal-footer">
 
 
-    <div class="col-md-2 ">
+    @*<div class="col-md-2 ">
         <button class="btn btn-info btn-lg sharp-corners  pull-left" id="print-button" onclick="PrintInBrowser(this)">
             Print
         </button>
-    </div>
+    </div>*@
     <div class="col-md-3">
 
 
@@ -32,7 +34,7 @@
             Save in .pdf
         </button>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-7">
         <div id="email-user-pdf" class="input-group input-group-lg" style="margin-bottom: 5%; display: none;">
             <span class="input-group-addon">Email</span>
             <input type="email" id="input-user-email-pdf" class="form-control" placeholder="Enter email">

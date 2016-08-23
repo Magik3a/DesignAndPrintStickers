@@ -8,7 +8,7 @@
   height: 297mm;
   padding-top: 10mm;
   padding-left: 10mm;
-  border: 1px solid black;
+  border: 1px solid #ebebeb;
   display: inline-block;
 }
 #page-for-printing .template-box {

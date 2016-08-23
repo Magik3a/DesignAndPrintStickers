@@ -38,5 +38,12 @@ namespace Models
 
         [Required]
         public string BoxHeight { get; set; }
+
+        public string MarginTop { get; set; }
+
+        public string MarginBottom { get; set; }
+        public string MarginLeft { get; set; }
+
+        public string MarginRIght { get; set; }
     }
 }
