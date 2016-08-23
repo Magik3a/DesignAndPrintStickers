@@ -21,7 +21,7 @@
         {
             using (MemoryStream stream = new MemoryStream(content))
             {
-                return RoundCorners(stream, cornerRadius);
+                return CropToCircle(stream, Color.White);
             }
         }
 
@@ -71,6 +71,24 @@
                 g.DrawImage(image, Point.Empty);
             }
             return GetBitmapBytes(roundedImage);
+        }
+
+
+        public static byte[] CropToCircle(Stream content, Color backGround)
+        {
+            Image srcImage = Image.FromStream(content);
+            Bitmap dstImage = new Bitmap(srcImage.Width, srcImage.Height, srcImage.PixelFormat);
+            Graphics g = Graphics.FromImage(dstImage);
+            using (Brush br = new SolidBrush(backGround))
+            {
+                g.FillRectangle(br, 0, 0, dstImage.Width, dstImage.Height);
+            }
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(0, 0, dstImage.Width, dstImage.Height);
+            g.SetClip(path);
+            g.DrawImage(srcImage, 0, 0);
+
+            return GetBitmapBytes(dstImage);
         }
 
         public static byte[] GetBitmapBytes(Bitmap source)

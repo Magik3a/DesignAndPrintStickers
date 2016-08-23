@@ -189,5 +189,5 @@ function SendAnotherMessageWIthAtachment(elem) {
 
     
     $(elem).attr("onclick", "SendMessageWithAtachment(this)");
-    $(elem).html("<span class='glyphicon glyphicon-envelope'></span> Press again to sent!")
+    $(elem).html("Press again to sent!")
 };
