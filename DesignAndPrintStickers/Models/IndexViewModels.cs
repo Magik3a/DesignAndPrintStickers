@@ -20,6 +20,11 @@ namespace DesignAndPrintStickers.Models
 
         public int BoxCount { get; set; }
 
+        public int BorderRadiusPercent { get; set; }
         public int BoxesPerRow { get; set; }
+
+        public string BoxWidth { get; set; }
+
+        public string BoxHeight { get; set; }
     }
 }

@@ -30,5 +30,13 @@ namespace Models
 
         [Required]
         public int BorderRadiusPercent { get; set; }
+
+
+        [Required]
+        public string BoxWidth { get; set; }
+
+
+        [Required]
+        public string BoxHeight { get; set; }
     }
 }

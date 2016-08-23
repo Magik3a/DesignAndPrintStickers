@@ -54,7 +54,9 @@ namespace DesignAndPrintStickers.Controllers
             model.TemplateClass = template.CssClass;
             model.BoxesCount = template.BoxCount;
             model.TemplateName = TemplateName;
-
+            model.BoxHeight = template.BoxHeight;
+            model.BoxWidth = template.BoxWidth;
+            model.BorderRadiusPercent = template.BorderRadiusPercent;
             return PartialView("ModalTemplates/AddImagesModal", model);
         }
 
@@ -302,7 +304,7 @@ namespace DesignAndPrintStickers.Controllers
                
                 var cell = new PdfPCell();
                 cell.Border = 0;
-                cell.Padding = 4f;
+                cell.Padding = 28;
                 cell.AddElement(jpg);
                 pdfTable.AddCell(new PdfPCell(cell));
 

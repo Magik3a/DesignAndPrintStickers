@@ -72,7 +72,7 @@
 
                     @for (int j = 0; j < template.BoxCount; j++)
                     {
-                        <div class="template-box @template.CssClass">
+                        <div class="template-box @template.CssClass" style="@template.Css ; border-radius: @template.BorderRadiusPercent%; ">
 
                         </div>
                     }
@@ -154,7 +154,7 @@
                     $('#image').show();
                     $('#uploaderForOne').hide();
                     ImageCropper.InitCrop();
-             
+
                 }
             });
         });
@@ -176,7 +176,7 @@
                     $('#imageForAll').show();
                     $('#uploaderForAll').hide();
                     ImageCropper.InitCropForAll();
-                   
+
                 }
             });
         });
@@ -203,8 +203,18 @@
             $(document).on('hidden.bs.modal', '.modal', function () {
                 $('.modal:visible').length && $(document.body).addClass('modal-open');
             });
-            var fourColumnHeight = $(".template-box").width();
-            $(".template-box").height(fourColumnHeight);
+            //var fourColumnHeight = $(".template-box").width();
+            //$(".template-box").height(fourColumnHeight);
+
+
+            $(".template-box").each(function () {
+                var widthBox = $(this).width();
+                if ($(this).hasClass("template-rectangle")) {
+                    $(this).height(widthBox / 1.59);
+                    return;
+                }
+                $(this).height(widthBox);
+            });
             ImageCropper.init();
         });
 

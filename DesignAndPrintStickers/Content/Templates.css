@@ -1,8 +1,19 @@
 ﻿.template-box {
   border: 1px solid #989898;
   background: white;
-  margin: 5px;
   display: inline-block;
+}
+#page-for-printing {
+  width: 210mm;
+  height: 297mm;
+  padding-top: 10mm;
+  padding-left: 10mm;
+  border: 1px solid black;
+  display: inline-block;
+}
+#page-for-printing .template-box {
+  margin-bottom: 10mm;
+  margin-right: 10mm;
 }
 /*#region Template Square */
 .template-square {
@@ -15,16 +26,6 @@
   }
 }
 /*#endregion */
-/*#region Template Rectangle*/
-.template-rectangle {
-  width: 45%;
-}
-@media only screen and (max-width: 1324px) {
-  .template-rectangle {
-    height: 7mm;
-    width: 17mm;
-  }
-}
 /*#endregion */
 /*#region Template round */
 .template-round {

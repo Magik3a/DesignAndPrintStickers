@@ -24,7 +24,7 @@
     InitCrop: function () {
         //initialize the cropper method
         $('#image').cropper({
-            aspectRatio: ($(".active-template").attr("data-boxesperrow") == "4")?1:18/9,
+            aspectRatio: ($(".active-template").attr("data-boxesperrow") == "2")?1:18/9,
             dragMode: 'move', //enabling dragging of image
             center: true,
             autoCrop: true, //use this to just zoom and pan image around
@@ -42,7 +42,7 @@
     InitCropForAll: function () {
         //initialize the cropper method
         $('#imageForAll').cropper({
-            aspectRatio: ($(".active-template").attr("data-boxesperrow") == "4")?1:18/9,
+            aspectRatio: ($(".active-template").attr("data-boxesperrow") == "2")?1:18/9,
             dragMode: 'move', //enabling dragging of image
             center: true,
             autoCrop: true, //use this to just zoom and pan image around

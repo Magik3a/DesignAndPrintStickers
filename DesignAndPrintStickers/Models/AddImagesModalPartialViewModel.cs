@@ -18,7 +18,13 @@ namespace DesignAndPrintStickers.Models
         public string TemplateClass { get; set; }
 
         public int BoxesCount { get; set; }
+        
+        public int BorderRadiusPercent { get; set; }
 
+        public int BoxesPerRow { get; set; }
 
+        public string BoxWidth { get; set; }
+
+        public string BoxHeight { get; set; }
     }
 }
