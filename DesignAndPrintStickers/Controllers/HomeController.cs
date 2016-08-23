@@ -54,7 +54,7 @@ namespace DesignAndPrintStickers.Controllers
             model.TemplateClass = template.CssClass;
             model.BoxesCount = template.BoxCount;
             model.TemplateName = TemplateName;
-            
+
             return PartialView("ModalTemplates/AddImagesModal", model);
         }
 
@@ -283,11 +283,11 @@ namespace DesignAndPrintStickers.Controllers
                 OptionAutoCloseOnEnd = true
             };
             hDocument.LoadHtml(html);
-            List<string> xpaths = new List<string>();
             int counter = 0;
 
             var pdfTable = new PdfPTable(itemsPerRow);
-
+            pdfTable.WidthPercentage = 93;
+            
             foreach (HtmlNode node in hDocument.DocumentNode.SelectNodes("//img"))
             {
                 counter++;
@@ -295,36 +295,22 @@ namespace DesignAndPrintStickers.Controllers
                 src = Server.MapPath(src);
                 Image jpg = Image.GetInstance(src);
 
-                if (itemsPerRow == 2)
-                    jpg.ScaleAbsolute(350 / itemsPerRow, 70f);
-                else if (itemsPerRow == 4)
-                    jpg.ScaleAbsolute(350 / itemsPerRow, 115f);
-                
+                //if (itemsPerRow == 2)
+                //    jpg.ScaleAbsolute(350 / itemsPerRow, 70f);
+                //else if (itemsPerRow == 4)
+                //    jpg.ScaleAbsolute(350 / itemsPerRow, 115f);
+               
                 var cell = new PdfPCell();
+                cell.Border = 0;
+                cell.Padding = 4f;
                 cell.AddElement(jpg);
                 pdfTable.AddCell(new PdfPCell(cell));
 
-                // doc.Add(jpg);
-                if (counter == itemsPerRow || (counter > itemsPerRow && counter % itemsPerRow == 0))
-                {
-
-
-                }
-
             }
+
             doc.Add(pdfTable);
-            foreach (string xpath in xpaths)
-            {
-                hDocument.DocumentNode.SelectSingleNode(xpath).Remove();
-            }
-
-            var closedTags = hDocument.DocumentNode.WriteTo();
-            var example_html = "";
-            var example_css = System.IO.File.ReadAllText(Server.MapPath("~/Content/Site.css"));
-            example_css += System.IO.File.ReadAllText(Server.MapPath("~/Content/Templates.min.css"));
-            var msCss = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(example_css));
-            var msHtml = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(example_html));
-            iTextSharp.tool.xml.XMLWorkerHelper.GetInstance().ParseXHtml(writer, doc, msHtml, msCss, Encoding.UTF8);
+            var msHtml = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(""));
+            iTextSharp.tool.xml.XMLWorkerHelper.GetInstance().ParseXHtml(writer, doc, msHtml, Encoding.UTF8);
 
             doc.Close();
             bytes = ms.ToArray();
