@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/overhang.min.css" rel="stylesheet" />
-      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.2/cropper.min.css" rel="stylesheet" />
     <link href="~/Content/Templates.min.css" rel="stylesheet" />
@@ -27,15 +27,19 @@
                 </h1>
                 <div class="pull-right">
                     <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-primary">Share on FB</button>
-                        <button type="button" class="btn btn-danger">Share on G+</button>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=yeppey.com" class="btn btn-primary" target="_blank">
+                            Share on FB
+                        </a>
+                        <a href="https://plus.google.com/share?url=yeppey.com" class="btn btn-danger" target="_blank">
+                            Share on G+
+                        </a>
                     </div>
                 </div>
             </div>
 
             @RenderBody()
 
-                <hr />
+            <hr />
 
             <footer>
                 <div class="content-wrapper text-center">
@@ -59,7 +63,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    
+
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
     <script src="~/Scripts/jQuery.FileUpload/jquery.iframe-transport.js"></script>
