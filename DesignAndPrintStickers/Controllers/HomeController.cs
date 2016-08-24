@@ -84,9 +84,13 @@ namespace DesignAndPrintStickers.Controllers
             byte[] imageBytes = System.IO.File.ReadAllBytes(Server.MapPath(imagePath));
             byte[] croppedImage = ImageHelper.CropImage(imageBytes, cropPointX.Value, cropPointY.Value, imageCropWidth.Value, imageCropHeight.Value);
 
-            if (borderRadius > 0)
+            if (borderRadius > 50)
             {
                 croppedImage = ImageHelper.RoundCornersImage(croppedImage, borderRadius);
+            }
+            else
+            {
+                croppedImage = ImageHelper.ImageWithBorderRadius(croppedImage, borderRadius);
             }
             string fileName = Path.GetFileName(imagePath);
 
@@ -330,9 +334,9 @@ namespace DesignAndPrintStickers.Controllers
             //Create an iTextSharp Document wich is an abstraction of a PDF but **NOT** a PDF
             var doc = new Document();
             if (pageSize == "A4")
-                doc = new Document(PageSize.A4, MarginLeft * 2.8f, MarginRight * 2.8f -28, MarginTop * 2.8f, MarginBottom * 2.8f);
+                doc = new Document(PageSize.A4, MarginLeft * 2.7f, MarginRight * 2.7f -28, MarginTop * 2.7f, MarginBottom * 2.7f-40);
             else
-                doc = new Document(PageSize.LETTER, MarginLeft * 2.8f, MarginRight * 2.8f -28, MarginTop * 2.8f, MarginBottom * 2.8f);
+                doc = new Document(PageSize.LETTER, MarginLeft * 2.7f, MarginRight * 2.7f -28, MarginTop * 2.7f, MarginBottom * 2.7f -40);
             var writer = PdfWriter.GetInstance(doc, ms);
             doc.Open();
             doc.NewPage();

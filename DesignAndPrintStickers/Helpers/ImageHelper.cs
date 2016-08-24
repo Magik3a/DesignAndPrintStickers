@@ -17,6 +17,14 @@
             }
         }
 
+        public static byte[] ImageWithBorderRadius(byte[] content, int cornerRadius)
+        {
+            using (MemoryStream stream = new MemoryStream(content))
+            {
+                return RoundCorners(stream, cornerRadius);
+            }
+        }
+
         public static byte[] RoundCornersImage(byte[] content, int cornerRadius)
         {
             using (MemoryStream stream = new MemoryStream(content))

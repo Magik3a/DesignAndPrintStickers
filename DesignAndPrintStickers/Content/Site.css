@@ -17,7 +17,7 @@
     overflow: auto;
     padding-left: 250px;
     transition: all 0.4s ease 0s;
-    background-color:#696969;
+    background-color:#808080;
    
     background-attachment: fixed;
 }
@@ -130,14 +130,36 @@ footer {
     box-shadow: 0 0 25px #060090 inset;
     border: solid 2px blue;
 }
+.choose-paper{
+}
+.btn-choose-paper {
+}
+.btn-choose-paper span:first-child{
+  padding-top: 3%;
+}
+.btn-choose-paper span:nth-child(3){
+vertical-align: middle;
+font-size: 22px;
+}
+.btn-choose-paper span:last-child{
+  padding-top: 4%;
 
-
+}
 .choose-template-row {
     padding-top: 20px;
+    text-align: left;
 }
 
 .choose-template-row .panel .panel-body {
 
+}
+
+.template{
+    text-align: center;
+    width: 20%;
+    display: inline-block;
+    margin-right: 2%;
+    vertical-align: top;
 }
 .template .panel{
     cursor: pointer;
@@ -162,7 +184,7 @@ footer {
 
 @media only screen and (max-width : 1424px) {
     .row-body button span:not(:nth-child(3)) {
-    font-size: 16px;
+
 }
         .row-body button {
     font-size: 12px;
@@ -306,7 +328,8 @@ footer {
         display: inline-block;
     }
 
-#menu-toggle {
+.menu-toggle {
+    font-size: 18px
 }
 
 .btn-menu {

@@ -24,7 +24,7 @@
     InitCrop: function () {
         //initialize the cropper method
         $('#image').cropper({
-            aspectRatio: ($(".active-template").attr("data-templatename") != "Rectangle")?1:43/27,
+            aspectRatio: ($(".active-template").attr("data-templatename") != "Credit card size (3.370x2.125'') ")?1:43/27,
             dragMode: 'move', //enabling dragging of image
             center: true,
             autoCrop: true, //use this to just zoom and pan image around
@@ -42,7 +42,7 @@
     InitCropForAll: function () {
         //initialize the cropper method
         $('#imageForAll').cropper({
-            aspectRatio: ($(".active-template").attr("data-templatename") != "Rectangle")?1:43/27,
+            aspectRatio: ($(".active-template").attr("data-templatename") != "Credit card size (3.370x2.125'') ")?1:43/27,
             dragMode: 'move', //enabling dragging of image
             center: true,
             autoCrop: true, //use this to just zoom and pan image around

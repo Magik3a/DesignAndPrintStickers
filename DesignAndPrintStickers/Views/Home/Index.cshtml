@@ -19,20 +19,8 @@
 
 
 <div class="col-md-12 pull-left row-body">
-    <button data-papersizename="A4" class="btn btn-info btn-sm col-md-2 text-justify sharp-corners btn-choose-paper">
-        <span class="pull-left">
-            <p class="custom-heading">A4 Standard</p>
-        </span>
 
-        <span>
-            |
-        </span>
-        <span class="pull-right">
-            <p class="custom-size">210 x 297 mm</p>
-        </span>
-    </button>
-
-    <button data-papersizename="US Letter" class="btn btn-info btn-sm col-md-2 text-justify sharp-corners  btn-choose-paper">
+    <button data-papersizename="US Letter" class="btn btn-info btn-sm col-md-3 text-justify sharp-corners  btn-choose-paper">
         <span class="pull-left">
             <p class="custom-heading">US Letter</p>
         </span>
@@ -44,7 +32,19 @@
             <p class="custom-size">216 x 279 mm</p>
         </span>
     </button>
+    
+    <button data-papersizename="A4" class="btn btn-info btn-sm col-md-3 text-justify sharp-corners btn-choose-paper">
+        <span class="pull-left">
+            <p class="custom-heading">A4 Standard</p>
+        </span>
 
+        <span>
+            |
+        </span>
+        <span class="pull-right">
+            <p class="custom-size">210 x 297 mm</p>
+        </span>
+    </button>
 </div>
 <div class="col-md-12 pull-left row-header">
     <div class="col-md-2">
@@ -64,10 +64,10 @@
 
     @foreach (var template in Model)
     {
-        <div class="col-md-3 template" data-templatename="@template.Name" data-boxesperrow="@template.BoxesPerRow">
+        <div class="template" data-templatename="@template.Name" data-boxesperrow="@template.BoxesPerRow">
 
             <div class="panel panel-primary">
-                <div class="panel-heading">@template.Name  - Boxes in current template - @template.BoxCount </div>
+                <div class="panel-heading">@template.Name  - @template.BoxCount labels per sheet</div>
                 <div class="panel-body">
 
                     @for (int j = 0; j < template.BoxCount; j++)
