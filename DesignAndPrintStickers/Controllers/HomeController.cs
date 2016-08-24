@@ -350,25 +350,36 @@ namespace DesignAndPrintStickers.Controllers
 
             var pdfTable = new PdfPTable(itemsPerRow);
             pdfTable.WidthPercentage = 100;
-            foreach (HtmlNode node in hDocument.DocumentNode.SelectNodes("//img"))
+            foreach (HtmlNode node in hDocument.DocumentNode.SelectNodes("//div"))
             {
                 counter++;
-                var src = node.Attributes["src"].Value.Split('?')[0];
-                src = Server.MapPath(src);
-                Image jpg = Image.GetInstance(src);
+                var cell = new PdfPCell();
+                cell.PaddingRight = 28;
+
+                cell.PaddingBottom = 28;
+
+                cell.Border = 0;
+                var lastChild = node.LastChild;
+                if(lastChild.Name == "img")
+                {
+                    var src = node.LastChild.Attributes["src"].Value.Split('?')[0];
+                    src = Server.MapPath(src);
+                    Image jpg = Image.GetInstance(src);
+                    cell.AddElement(jpg);
+                }
+                else
+                {
+                    cell.AddElement(new Chunk());
+                }
 
                 //if (itemsPerRow == 2)
                 //    jpg.ScaleAbsolute(350 / itemsPerRow, 70f);
                 //else if (itemsPerRow == 4)
                 //    jpg.ScaleAbsolute(350 / itemsPerRow, 115f);
                
-                var cell = new PdfPCell();
-                cell.Border = 0;
-                // cell.Padding = 28;
-                cell.PaddingRight = 28;
                 
-                cell.PaddingBottom = 28;
-                cell.AddElement(jpg);
+                // cell.Padding = 28;
+                
                 pdfTable.AddCell(new PdfPCell(cell));
 
             }
