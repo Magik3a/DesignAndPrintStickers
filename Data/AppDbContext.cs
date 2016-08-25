@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Data.Migrations;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Data
         public AppDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer<AppDbContext>(new CreateDatabaseIfNotExists<AppDbContext>());
         }
 
         public virtual IDbSet<PaperSize> PaperSizes { get; set; }

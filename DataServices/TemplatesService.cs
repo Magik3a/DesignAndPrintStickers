@@ -25,7 +25,7 @@ namespace DataServices
 
         public IQueryable<Template> GetTemplates()
         {
-            return db.All();
+            return db.All().OrderBy(t => t.Order);
         }
 
     }

@@ -18,6 +18,7 @@ $(".template").click(function () {
 $("#btnAddImage").click(function () {
     var templateName = $(".active-template").attr("data-templatename");
     var paperSizeName = $(".active-paper").attr("data-papersizename");
+    var borderRaiudsPercent = $(".active-template").attr("data-borderradius");
 
     console.log("template click " + templateName);
     if (templateName == null) {
@@ -38,6 +39,8 @@ $("#btnAddImage").click(function () {
         });
         return;
     }
+    $('#styletorender').html("");
+    $('#styletorender').append("<style>.cropper-view-box{border-radius:" + borderRaiudsPercent + "%;}</style>");
     $.get('Home/GetAddImagesModal', { TemplateName: templateName, PaperSize: paperSizeName }, function (data) {
         $("#AddImagesModal .modal-content").html("");
 
@@ -46,8 +49,18 @@ $("#btnAddImage").click(function () {
     });
 
 });
-function AddImageToPlaceHolder(elem) {
 
+
+function AddImageToPlaceHolder(elem) {
+    if ($(elem).children("img").length > 0) {
+        console.log("Have image");
+                $('.btn-remove-image').hide();
+        $(elem).find('.btn-remove-image').show();
+        return;
+    }
+    else {
+        $('.btn-remove-image').hide();
+    }
     if ($(elem).hasClass('active-box')) {
         return;
     };
@@ -69,7 +82,13 @@ function AddImageToPlaceHolder(elem) {
     //$(".active-box .panel-body").html("<a href='#' class='btn btn-default btn-add-image'>Add image to this place </a> ")
 };
 
-
+function RemoveImageFromPlaceHolder(elem) {
+    $(elem).parent().parent().find("img").remove();
+    $(elem).hide();
+    $(".btn-add-image").hide();
+    $(elem).parent().find(".btn-add-image").show();
+    console.log("removed");
+};
 function PrintInBrowser(elem) {
     $('.btn-add-image').hide();
     $(".template-box").removeClass("active-box");
@@ -164,7 +183,7 @@ function SendMessageWithAtachment(elem) {
     $(elem).attr("onclick", "SendAnotherMessageWIthAtachment(this)");
     //   $(this).unbind("click").click();
 
-        var paperSizeName = $(".active-paper").attr("data-papersizename");
+    var paperSizeName = $(".active-paper").attr("data-papersizename");
     var templateName = $(".active-template").attr("data-templatename");
     $.ajax({
         cache: false,

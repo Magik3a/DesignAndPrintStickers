@@ -45,5 +45,7 @@ namespace Models
         public string MarginLeft { get; set; }
 
         public string MarginRIght { get; set; }
+
+        public int Order { get; set; }
     }
 }

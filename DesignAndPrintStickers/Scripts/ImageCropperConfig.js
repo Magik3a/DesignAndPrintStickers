@@ -1,4 +1,22 @@
-﻿var ImageCropper = {
+﻿function getRoundedCanvas(sourceCanvas) {
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    var width = sourceCanvas.width;
+    var height = sourceCanvas.height;
+    canvas.width = width;
+    canvas.height = height;
+    context.beginPath();
+    context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI);
+    context.strokeStyle = 'rgba(0,0,0,0)';
+    context.stroke();
+    context.clip();
+    context.drawImage(sourceCanvas, 0, 0, width, height);
+    return canvas;
+};
+
+
+
+var ImageCropper = {
     config: {
         cropX: 0,
         cropY: 0,
@@ -85,6 +103,8 @@
                 $('#AddImageModalBody .active-box img').remove();
             }
             $('#AddImageModalBody .active-box').append("<img src='" + data.photoPath + "?t=" + new Date().getTime() + "' style='width: 100%; height: 100%; float: left;' />");
+            $('#AddImageModalBody .active-box').find('.btn-remove-image').show();
+            $('#AddImageModalBody .active-box').find('.btn-add-image').hide();
 
             $('#uploaderForOne').show();
             $('#image').attr("src", "");
@@ -121,6 +141,8 @@
                 }
 
                 $(element).append("<img src='" + data.photoPath + "?t=" + new Date().getTime() + "' style='width: 100%; height: 100%; float: left;' />");
+                $(element).find('.btn-remove-image').show();
+                  $(element).find('.btn-add-image').hide();   
                 console.log("appended image");
             });
 

@@ -114,19 +114,21 @@ namespace DesignAndPrintStickers.Controllers
             if (Request.IsAjaxRequest())
             {
                 var sb = new StringBuilder();
-                sb.AppendLine();
-                sb.AppendLine();
+                sb.AppendLine("<br />");
                 sb.AppendLine("From Email : " + Email);
-                sb.AppendLine();
-                sb.AppendLine();
+                sb.AppendLine("<br />");
+                sb.AppendLine("----------------------------------");
+                sb.AppendLine("<br />");
                 sb.AppendLine("User Name : " + NameUser);
-                sb.AppendLine();
-                sb.AppendLine();
+                sb.AppendLine("<br />");
+                sb.AppendLine("----------------------------------");
+                sb.AppendLine("<br />");
                 sb.AppendLine("Subject : " + Subject);
-                sb.AppendLine();
-                sb.AppendLine();
-                sb.AppendLine(Body);
-                if (!SendEmail(ConfigurationManager.AppSettings["ContactEmail"], "New Email - " + DateTime.Now.ToString("dd-MM-yyyy"), sb.ToString()))
+                sb.AppendLine("<br />");
+                sb.AppendLine("----------------------------------");
+                sb.AppendLine("<br />");
+                sb.AppendLine("Message : " + Body);
+                if (!SendEmail(ConfigurationManager.AppSettings["ContactEmail"], "New Email - " + DateTime.Now.ToString("dd-MM-yyyy mm-ss"), sb.ToString()))
                 {
 
                     return Json(false);

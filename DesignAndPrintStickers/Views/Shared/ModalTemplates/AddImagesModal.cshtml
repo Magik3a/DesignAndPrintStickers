@@ -7,14 +7,17 @@
 <div class="modal-body" id="AddImageModalBody" style="width: 100%">
     <button class="btn btn-info btn-lg" data-toggle="modal" data-target=".add-picture-modal-toall">Add image to all boxes</button>
     <div id="page-for-printing" style="width: @String.Format("{0}{1}", Model.PaperSizeWith,"mm"); height: @String.Format("{0}{1}",Model.PaperSizeHeight,"mm")">
-    
-            @for (int j = 0; j < Model.BoxesCount; j++)
+
+        @for (int j = 0; j < Model.BoxesCount; j++)
             {
-                <div class="template-box @Model.TemplateClass" style="height: @String.Format("{0}{1}", Model.BoxHeight, "mm"); width: @String.Format("{0}{1}", Model.BoxWidth, "mm");  border-radius: @Model.BorderRadiusPercent%;" onmousedown="AddImageToPlaceHolder(this)">
-                    <a href='#' class='btn btn-success btn-add-image' style="display: none;" data-toggle="modal" data-target=".add-picture-modal">Add image </a>
-                </div>
-            }
-     
+            <div class="template-box @Model.TemplateClass" style="height: @String.Format("{0}{1}", Model.BoxHeight, "mm"); width: @String.Format("{0}{1}", Model.BoxWidth, "mm");  border-radius: @Model.BorderRadiusPercent%;" onmousedown="AddImageToPlaceHolder(this)">
+                <article class="image-controls">
+                    <a href='#' class='btn btn-success btn-add-image' style="display: none;" data-toggle="modal" data-target=".add-picture-modal"><span class="glyphicon glyphicon-plus"></span></a>
+                    <a href='#' class='btn btn-danger btn-remove-image' style="display: none;" onclick="RemoveImageFromPlaceHolder(this)"><span class="glyphicon glyphicon-remove"></span> </a>
+                </article>
+            </div>
+        }
+
     </div>
 
 
@@ -23,10 +26,10 @@
 
 
     @*<div class="col-md-2 ">
-        <button class="btn btn-info btn-lg sharp-corners  pull-left" id="print-button" onclick="PrintInBrowser(this)">
-            Print
-        </button>
-    </div>*@
+            <button class="btn btn-info btn-lg sharp-corners  pull-left" id="print-button" onclick="PrintInBrowser(this)">
+                Print
+            </button>
+        </div>*@
     <div class="col-md-3">
 
 
