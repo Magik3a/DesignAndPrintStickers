@@ -1,0 +1,6 @@
+{
+  "name": "Design And Print Stickers",
+  "tagline": "System for creating and printing stickers",
+  "body": "### Info\r\nSystem for creating and printing stickers with functionalities that include image resizing , cropping and uploading; Custom templates for users to choose and possibility for great stuff!\r\n\r\n### Included Packages\r\n* Jquery file upload\r\n* iTextSharp\r\n* Html Agility Pack\r\n* Cropper v2.3.3 - jQuery image cropping plugin.\r\n\r\n### Contributors\r\n@PetyaWebDesign\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
