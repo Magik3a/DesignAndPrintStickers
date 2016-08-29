@@ -300,6 +300,7 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <None Include="Properties\PublishProfiles\Default Settings %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Images\accent.png" />
@@ -315,6 +316,7 @@
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\Logo.png" />
     <Content Include="Images\LogoFB.png" />
+    <Content Include="Images\tutorial.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ClickEvents.js" />

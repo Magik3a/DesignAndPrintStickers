@@ -13,7 +13,7 @@ namespace Data.Migrations
         public Configuration()
         {
             
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Data.AppDbContext context)
@@ -64,7 +64,7 @@ namespace Data.Migrations
                 {
                     Name = "Credit card size (3.370x2.125'') ",
                     CssClass = "template-rectangle",
-                    Css = "width:48%;",
+                    Css = "width:47.5%;",
                     BoxCount = 8,
                     BoxesPerRow = 2,
                     BorderRadiusPercent = 10,
@@ -80,7 +80,7 @@ namespace Data.Migrations
                 {
                     Name = "Circle D 3\"",
                     CssClass = "template-roundx2",
-                    Css = "width:44%;",
+                    Css = "width:43.3%;",
                     BoxCount = 6,
                     BoxesPerRow = 2,
                     BorderRadiusPercent = 100,
@@ -88,15 +88,15 @@ namespace Data.Migrations
                     BoxHeight = "76",
                     MarginTop = "5",
                     MarginBottom = "0",
-                    MarginLeft = "20",
-                    MarginRIght = "20",
+                    MarginLeft = "12.3",
+                    MarginRIght = "12.3",
                     Order = 2
                 },
                 new Template
                 {
                     Name = "Circle D 2.25\"",
                     CssClass = "template-roundx3",
-                    Css = "width:32.4%;",
+                    Css = "width:32%;",
                     BoxCount = 12,
                     BoxesPerRow = 3,
                     BorderRadiusPercent = 100,

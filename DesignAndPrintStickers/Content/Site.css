@@ -56,7 +56,7 @@
 }
 
 .down-menu {
-    margin-top: 300%;
+    margin-top: 260%;
 }
 
 /*#region Footer CSS */
@@ -152,8 +152,18 @@ font-size: 22px;
 }
 .template .panel{
     cursor: pointer;
+    min-height: 24em;
 }
+.template .panel-heading{
+    height: 50px;
 
+}
+@media only screen and (max-width : 1424px) {
+    .template .panel-heading{
+    padding: 8px;
+
+}
+}
 .active-template .panel {
     background-color: blue;
     -moz-box-shadow: 0 0 20px blue inset;
@@ -247,6 +257,7 @@ font-size: 22px;
 
     .sidebar-nav li {
         line-height: 40px;
+   
     }
 
         .sidebar-nav li img {
@@ -263,6 +274,7 @@ font-size: 22px;
     display: block;
     text-decoration: none;
     font-size: 22px;
+         width: 90%;
     transition: all ease-in-out 0.1s;
 }
 

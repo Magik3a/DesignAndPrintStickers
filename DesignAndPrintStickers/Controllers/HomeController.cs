@@ -367,6 +367,7 @@ namespace DesignAndPrintStickers.Controllers
                     var src = node.LastChild.Attributes["src"].Value.Split('?')[0];
                     src = Server.MapPath(src);
                     Image jpg = Image.GetInstance(src);
+                  
                     cell.AddElement(jpg);
                 }
                 else

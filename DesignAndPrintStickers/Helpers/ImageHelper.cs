@@ -74,7 +74,8 @@
             gp.AddArc(0, 0 + roundedImage.Height - cornerRadius, cornerRadius, cornerRadius, 90, 90);
             using (Graphics g = Graphics.FromImage(roundedImage))
             {
-                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+
                 g.SetClip(gp);
                 g.DrawImage(image, Point.Empty);
             }

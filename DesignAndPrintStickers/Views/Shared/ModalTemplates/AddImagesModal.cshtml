@@ -10,7 +10,7 @@
 
         @for (int j = 0; j < Model.BoxesCount; j++)
             {
-            <div class="template-box @Model.TemplateClass" style="height: @String.Format("{0}{1}", Model.BoxHeight, "mm"); width: @String.Format("{0}{1}", Model.BoxWidth, "mm");  border-radius: @Model.BorderRadiusPercent%;" onmousedown="AddImageToPlaceHolder(this)">
+            <div class="template-box @Model.TemplateClass" style="height: @String.Format("{0}{1}", Model.BoxHeight, "mm"); width: @String.Format("{0}{1}", Model.BoxWidth, "mm");  border-radius: @Model.BorderRadiusPercent%;"  onmouseover="AddImageToPlaceHolder(this)">
                 <article class="image-controls">
                     <a href='#' class='btn btn-success btn-add-image' style="display: none;" data-toggle="modal" data-target=".add-picture-modal"><span class="glyphicon glyphicon-plus"></span></a>
                     <a href='#' class='btn btn-danger btn-remove-image' style="display: none;" onclick="RemoveImageFromPlaceHolder(this)"><span class="glyphicon glyphicon-remove"></span> </a>
