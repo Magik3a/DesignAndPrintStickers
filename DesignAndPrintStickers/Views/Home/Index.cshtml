@@ -32,7 +32,7 @@
             <p class="custom-size">216 x 279 mm</p>
         </span>
     </button>
-    
+
     <button data-papersizename="A4" class="btn btn-info btn-sm col-md-3 text-justify sharp-corners btn-choose-paper">
         <span class="pull-left">
             <p class="custom-heading">A4 Standard</p>
@@ -128,6 +128,14 @@
 @Html.Partial("ModalTemplates/UploadAndCropImageForOneBox")
 
 @Html.Partial("ModalTemplates/UploadAndCropImageToAll")
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal-label">
+    <div class="modal-dialog modal-lg" role="document" style="margin-top: 10%; text-align: left">
+        @Html.Partial("LoginPartial", new DesignAndPrintStickers.Models.LoginViewModel())
+
+    </div>
+</div>
+
 @section Scripts{
     <script src="~/Scripts/jquery.printelement.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.2/cropper.min.js"></script>

@@ -10,7 +10,9 @@
 }
 /*#region Page CSS */
 
-
+.jumbotron hr{
+   border-top: 2px solid  #999999;
+}
 #wrapper {
     height: 100%;
     text-align: center;

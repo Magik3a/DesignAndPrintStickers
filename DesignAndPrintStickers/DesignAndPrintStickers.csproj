@@ -396,6 +396,8 @@
     <Content Include="Views\Shared\ModalTemplates\AddImagesModal.cshtml" />
     <Content Include="Views\Shared\ModalTemplates\UploadAndCropImageForOneBox.cshtml" />
     <Content Include="Views\Shared\ModalTemplates\UploadAndCropImageToAll.cshtml" />
+    <Content Include="Views\Shared\LoginPartial.cshtml" />
+    <Content Include="Views\Shared\RegisterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

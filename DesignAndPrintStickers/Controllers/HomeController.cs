@@ -107,6 +107,8 @@ namespace DesignAndPrintStickers.Controllers
             string photoPath = string.Concat("/", fileName);
             return Json(new { photoPath = imagePath }, JsonRequestBehavior.AllowGet);
         }
+
+
         #region Mailing functions
 
         public ActionResult SentEmailAjax(string Email, string NameUser, string Subject, string Body)
@@ -184,6 +186,7 @@ namespace DesignAndPrintStickers.Controllers
         }
         #endregion
 
+        #region Download
 
         [HttpPost]
         [ValidateInput(false)]
@@ -195,10 +198,10 @@ namespace DesignAndPrintStickers.Controllers
             {
                 var template = templatesService.GetTemplateByName(templateName).FirstOrDefault();
                 byte[] bytes = GenerateImagesPDF(
-                    html, 
-                    pagesize, 
-                    template.BoxesPerRow, 
-                    float.Parse(template.MarginTop), 
+                    html,
+                    pagesize,
+                    template.BoxesPerRow,
+                    float.Parse(template.MarginTop),
                     float.Parse(template.MarginBottom),
                     float.Parse(template.MarginLeft), float.Parse(template.MarginRIght));
 
@@ -236,7 +239,7 @@ namespace DesignAndPrintStickers.Controllers
             }
         }
 
-
+        #endregion
 
         [HttpPost]
         [ValidateInput(false)]
@@ -244,7 +247,7 @@ namespace DesignAndPrintStickers.Controllers
         {
             if (String.IsNullOrWhiteSpace(pagesize))
                 return Json(false);
-            
+
             try
             {
                 var template = templatesService.GetTemplateByName(templateName).FirstOrDefault();
@@ -264,6 +267,7 @@ namespace DesignAndPrintStickers.Controllers
             }
         }
 
+        #region Generate PDF
 
         public byte[] GeneratePDF(string html, string pageSize)
         {
@@ -336,9 +340,9 @@ namespace DesignAndPrintStickers.Controllers
             //Create an iTextSharp Document wich is an abstraction of a PDF but **NOT** a PDF
             var doc = new Document();
             if (pageSize == "A4")
-                doc = new Document(PageSize.A4, MarginLeft * 2.7f, MarginRight * 2.7f -28, MarginTop * 2.7f, MarginBottom * 2.7f-40);
+                doc = new Document(PageSize.A4, MarginLeft * 2.7f, MarginRight * 2.7f - 28, MarginTop * 2.7f, MarginBottom * 2.7f - 40);
             else
-                doc = new Document(PageSize.LETTER, MarginLeft * 2.7f, MarginRight * 2.7f -28, MarginTop * 2.7f, MarginBottom * 2.7f -40);
+                doc = new Document(PageSize.LETTER, MarginLeft * 2.7f, MarginRight * 2.7f - 28, MarginTop * 2.7f, MarginBottom * 2.7f - 40);
             var writer = PdfWriter.GetInstance(doc, ms);
             doc.Open();
             doc.NewPage();
@@ -362,12 +366,12 @@ namespace DesignAndPrintStickers.Controllers
 
                 cell.Border = 0;
                 var lastChild = node.LastChild;
-                if(lastChild.Name == "img")
+                if (lastChild.Name == "img")
                 {
                     var src = node.LastChild.Attributes["src"].Value.Split('?')[0];
                     src = Server.MapPath(src);
                     Image jpg = Image.GetInstance(src);
-                  
+
                     cell.AddElement(jpg);
                 }
                 else
@@ -379,10 +383,10 @@ namespace DesignAndPrintStickers.Controllers
                 //    jpg.ScaleAbsolute(350 / itemsPerRow, 70f);
                 //else if (itemsPerRow == 4)
                 //    jpg.ScaleAbsolute(350 / itemsPerRow, 115f);
-               
-                
+
+
                 // cell.Padding = 28;
-                
+
                 pdfTable.AddCell(new PdfPCell(cell));
 
             }
@@ -399,6 +403,29 @@ namespace DesignAndPrintStickers.Controllers
             #endregion
 
             return bytes;
+        }
+
+
+
+        #endregion
+
+
+
+        public JsonResult CheckIfUserIsLogged()
+        {
+            if (User.Identity.IsAuthenticated)
+                return Json(true, JsonRequestBehavior.AllowGet);
+            else
+                return Json(false, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetLoginForm()
+        {
+            return PartialView("LoginPartial", new LoginViewModel());
+        }
+        public ActionResult GetRegisterForm()
+        {
+            return PartialView("RegisterPartial", new RegisterViewModel());
         }
     }
 

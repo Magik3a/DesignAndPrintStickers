@@ -33,7 +33,24 @@
                         <a href="https://plus.google.com/share?url=yeppey.com" class="btn btn-danger" target="_blank">
                             Share on G+
                         </a>
+                     
                     </div>
+                       @using Microsoft.AspNet.Identity
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "btn-group" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!",
+                                       "Index",
+                                       "Manage",
+                                       routeValues: null, htmlAttributes: new { title = "Manage", @class="btn btn-default" })
+
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default ">Log off</a>
+
+                            }
+                        }
                 </div>
             </div>
 
@@ -84,4 +101,5 @@
         });
     </script>
 </body>
+
 </html>

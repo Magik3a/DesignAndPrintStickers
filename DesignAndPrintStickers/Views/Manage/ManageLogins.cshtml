@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Manage your external logins";
 }
-
+<div class="jumbotron">
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
@@ -12,8 +12,7 @@
     if (loginProviders.Count() == 0) {
         <div>
             <p>
-                There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=313242">this article</a>
-                for details on setting up this ASP.NET application to support logging in via external services.
+                There are no external authentication services. 
             </p>
         </div>
     }
@@ -68,3 +67,4 @@
         }
     }
 }
+    </div>

@@ -20,6 +20,7 @@ $("#btnAddImage").click(function () {
     var paperSizeName = $(".active-paper").attr("data-papersizename");
     var borderRaiudsPercent = $(".active-template").attr("data-borderradius");
 
+
     console.log("template click " + templateName);
     if (templateName == null) {
         $("#wrapper").overhang({
@@ -39,6 +40,32 @@ $("#btnAddImage").click(function () {
         });
         return;
     }
+    var isLogget = false;
+    //$.get("Home/CheckIfUserIsLogged", function (data) {
+    //    console.log(data);
+    //    isLogget = data;
+    //});
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'Home/CheckIfUserIsLogged',
+        success: function (data) {
+              console.log(data);
+        isLogget = data;
+        }
+    });
+    console.log(isLogget);
+    if (!isLogget) {
+        $("#wrapper").overhang({
+            type: "warn",
+            message: "You have to be logged in.",
+            duration: 2,
+            upper: true
+        });
+
+        $("#loginModal").modal("show");
+        return;
+    }
     $('#styletorender').html("");
     $('#styletorender').append("<style>.cropper-view-box{border-radius:" + borderRaiudsPercent + "%;}</style>");
     $.get('Home/GetAddImagesModal', { TemplateName: templateName, PaperSize: paperSizeName }, function (data) {
@@ -54,7 +81,7 @@ $("#btnAddImage").click(function () {
 function AddImageToPlaceHolder(elem) {
     if ($(elem).children("img").length > 0) {
         console.log("Have image");
-                $('.btn-remove-image').hide();
+        $('.btn-remove-image').hide();
         $(elem).find('.btn-remove-image').show();
         return;
     }
@@ -240,4 +267,14 @@ function SendAnotherMessageWIthAtachment(elem) {
 
     $(elem).attr("onclick", "SendMessageWithAtachment(this)");
     $(elem).html("Press again to sent!")
+};
+
+function HideModalLogin(data) {
+
+    console.log(data);
+
+
+    if (data === true) {
+        location.reload();
+    }
 };
