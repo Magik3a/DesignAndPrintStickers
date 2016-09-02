@@ -258,7 +258,7 @@ namespace DesignAndPrintStickers.Controllers
                     float.Parse(template.MarginTop),
                     float.Parse(template.MarginBottom),
                     float.Parse(template.MarginLeft), float.Parse(template.MarginRIght));
-                SendEmail(reciever, "New email with stickers", "Here should be logo", bytes, DateTime.Now.ToString(CultureInfo.InvariantCulture) + ".pdf");
+                SendEmail(reciever, "New email with stickers", "<a href='http://app.yeppey.com' title='app.yeppey.com'> <img src='http://app.yeppey.com/Images/Logo.png' style='background: white;' /> </a>", bytes, DateTime.Now.ToString(CultureInfo.InvariantCulture) + ".pdf");
                 return Json(true);
             }
             catch (Exception ex)

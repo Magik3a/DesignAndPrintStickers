@@ -271,7 +271,7 @@ function SendAnotherMessageWIthAtachment(elem) {
 
 function HideModalLogin(data) {
 
-    console.log(data);
+   // console.log(data);
 
 
     if (data === true) {

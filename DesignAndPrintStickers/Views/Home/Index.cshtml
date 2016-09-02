@@ -51,7 +51,7 @@
         <hr />
     </div>
 
-    <h4 class="col-md-3">Choose template</h4>
+    <h4 class="col-md-3">Choose a template</h4>
 
     <div class="col-md-4">
         <hr />
@@ -146,7 +146,7 @@
             $('#fileuploadForOne').fileupload({
                 progressall: function (e, data) {
                     var progress = parseInt(data.loaded / data.total * 100, 10);
-                    $('.progress .bar').css(
+                    $('.progressForOne .bar').css(
                         'width',
                         progress + '%'
                     );

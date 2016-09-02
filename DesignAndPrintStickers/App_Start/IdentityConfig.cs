@@ -13,15 +13,16 @@ using Microsoft.Owin.Security;
 using DesignAndPrintStickers.Models;
 using Models;
 using Data;
+using DesignAndPrintStickers.Helpers;
 
 namespace DesignAndPrintStickers
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await EmailHelper.SendAsync(message);
         }
     }
 
