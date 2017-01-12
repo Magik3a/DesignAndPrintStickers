@@ -73,8 +73,17 @@ $("#btnAddImage").click(function () {
 
         $("#AddImagesModal .modal-content").append(data);
         $("#AddImagesModal").modal("show");
-    });
+        $('.draggable').froalaEditor({
+            zIndex: 2501,
 
+            toolbarInline: true,
+            toolbarButtons: [ 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize',
+                '|', 'color', 'emoticons', 'inlineStyle', 'paragraphStyle',
+                '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable',
+                '|', 'quote', 'insertHR', 'undo', 'redo', 'clearFormatting', 'selectAll', 'html'],
+            pluginsEnabled: null
+        });
+    });
 });
 
 

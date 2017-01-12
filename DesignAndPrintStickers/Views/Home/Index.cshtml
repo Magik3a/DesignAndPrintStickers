@@ -60,6 +60,7 @@
 <div class="clearfix"></div>
 
 
+
 <div class="col-md-12  choose-template-row">
 
     @foreach (var template in Model)
@@ -72,9 +73,11 @@
 
                     @for (int j = 0; j < template.BoxCount; j++)
                     {
-                        <div class="template-box @template.CssClass" style="@template.Css ; border-radius: @template.BorderRadiusPercent%; ">
 
-                        </div>
+                            <div class="template-box @template.CssClass" style="@template.Css ; border-radius: @template.BorderRadiusPercent%; ">
+
+                            </div>
+
                     }
                 </div>
             </div>

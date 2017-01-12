@@ -10,7 +10,17 @@
 
         @for (int j = 0; j < Model.BoxesCount; j++)
             {
-            <div class="template-box @Model.TemplateClass" style="height: @String.Format("{0}{1}", Model.BoxHeight, "mm"); width: @String.Format("{0}{1}", Model.BoxWidth, "mm");  border-radius: @Model.BorderRadiusPercent%;"  onmouseover="AddImageToPlaceHolder(this)">
+            <div class="template-box @Model.TemplateClass" style="height: @String.Format("{0}{1}", Model.BoxHeight, "mm"); width: @String.Format("{0}{1}", Model.BoxWidth, "mm");  border-radius: @Model.BorderRadiusPercent%;" onmouseover="AddImageToPlaceHolder(this)">
+                <div class="draggable" style="position: absolute; top: 10%; width: 98%; height: 90%">
+                    <p style="text-align: center"><img alt="Editor photo" class="fr-fir fr-dii" src="http://lorempixel.com/200/200" style="width: 45%" /></p>
+                    <p><strong>Full name: </strong></p>
+                    <p>Company: </p>
+                    <p>Phone: </p>
+                    <p>Address: </p>
+                    <p>E-mail: </p>
+
+
+                </div>
                 <article class="image-controls">
                     <a href='#' class='btn btn-success btn-add-image' style="display: none;" data-toggle="modal" data-target=".add-picture-modal"><span class="glyphicon glyphicon-plus"></span></a>
                     <a href='#' class='btn btn-danger btn-remove-image' style="display: none;" onclick="RemoveImageFromPlaceHolder(this)"><span class="glyphicon glyphicon-remove"></span> </a>
